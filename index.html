@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio</title>
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Boxicons for icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="header">
+        <a href="#home" class="logo">Portfolio</a>
+        
+        <i class='bx bx-menu' id="menu-icon"></i>
+
+        <nav class="navbar">
+            <a href="#home" class="active">About Me</a>
+            <a href="#education">Education</a>
+            <a href="#experience">Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- About Me Section -->
+    <section class="home" id="home">
+        <div class="home-content">
+            <h3>Hello, I am</h3>
+            <h1>A Passionate Developer</h1>
+            <h3>University Student & <span>Tech Enthusiast</span></h3>
+            <p>I am an undergraduate student with a strong interest in software development, machine learning, and the intersection of technology and philosophy. I love solving complex logical problems and building impactful applications.</p>
+            <div class="social-media">
+                <a href="#"><i class='bx bxl-linkedin'></i></a>
+                <a href="#"><i class='bx bxl-github'></i></a>
+            </div>
+            <a href="#contact" class="btn">Contact Me</a>
+        </div>
+        <div class="home-img">
+            <img src="CK_Profile.png" alt="Profile Picture">
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education" id="education">
+        <h2 class="heading">My <span>Education</span></h2>
+        <div class="education-row">
+            <div class="education-column">
+                <div class="education-box">
+                    <div class="education-content">
+                        <div class="content">
+                            <div class="year"><i class='bx bxs-calendar'></i> Present</div>
+                            <h3>Undergraduate Studies</h3>
+                            <p>Currently pursuing my university degree. Actively involved in campus organizations, including leading a fundraising team and coordinating a software development consulting team for university events.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <h2 class="heading">Working <span>Experience</span></h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Sep 2025 - Nov 2025</div>
+                <div class="timeline-content">
+                    <h3>Business Application Intern</h3>
+                    <p>Completed a three-month professional internship focused on business applications and technical solutions.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Apr 2023 - Jun 2023</div>
+                <div class="timeline-content">
+                    <h3>Data Entry Clerk</h3>
+                    <p>Worked in an electrical and lighting installation company. Responsible for calculating and organizing technical items for project documentation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <h2 class="heading">My <span>Skills</span></h2>
+        <div class="skills-container">
+            <div class="skill-box">
+                <i class='bx bxl-python'></i>
+                <h3>Python & ML</h3>
+                <p>Game logic, optimization algorithms, gradient descent, and regression models.</p>
+            </div>
+            <div class="skill-box">
+                <i class='bx bxl-java'></i>
+                <h3>Java</h3>
+                <p>Swing UI components, layout managers, and system development.</p>
+            </div>
+            <div class="skill-box">
+                <i class='bx bx-data'></i>
+                <h3>R & Data Analysis</h3>
+                <p>Statistical modeling, data frames, and data visualization.</p>
+            </div>
+            <div class="skill-box">
+                <i class='bx bxl-tux'></i>
+                <h3>Linux & Systems</h3>
+                <p>System administration, network configuration, and terminal management.</p>
+            </div>
+            <div class="skill-box">
+                <i class='bx bxl-html5'></i>
+                <h3>Web Dev</h3>
+                <p>HTML, CSS, JavaScript, and responsive design.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <h2 class="heading">Latest <span>Projects</span></h2>
+        <div class="portfolio-container">
+            <div class="portfolio-box">
+                <div class="portfolio-layer">
+                    <h4>Anti-Scam Chatbot</h4>
+                    <p>Developed for a GovTech & Social Impact competition (April 2026). Features scam message analysis, risk scoring, and reporting integration.</p>
+                </div>
+            </div>
+            <div class="portfolio-box">
+                <div class="portfolio-layer">
+                    <h4>Facility Assignment AI</h4>
+                    <p>Implemented a Genetic Algorithm in Python to optimize site selection for candidate sites and clients (April 2026).</p>
+                </div>
+            </div>
+            <div class="portfolio-box">
+                <div class="portfolio-layer">
+                    <h4>TechNova Labs System</h4>
+                    <p>Designed a prototype Tour Management System in Java with comprehensive user roles and schedules (April 2026).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="heading">Contact <span>Me</span></h2>
+        <form action="#">
+            <div class="input-box">
+                <input type="text" placeholder="Full Name">
+                <input type="email" placeholder="Email Address">
+            </div>
+            <div class="input-box">
+                <input type="number" placeholder="Mobile Number">
+                <input type="text" placeholder="Email Subject">
+            </div>
+            <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
+            <input type="submit" value="Send Message" class="btn">
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2026 | All Rights Reserved.</p>
+        </div>
+        <div class="footer-iconTop">
+            <a href="#home"><i class='bx bx-up-arrow-alt'></i></a>
+        </div>
+    </footer>
+
+    <!-- Link to external JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
