@@ -41,7 +41,7 @@
             <a href="#contact" class="btn">Contact Me</a>
         </div>
         <div class="home-img">
-            <img src="CK_Profile_With_BG.jpg.jpeg" alt="Profile Picture">
+            <img src="CK_Profile.png" alt="Profile Picture">
         </div>
     </section>
 
@@ -146,16 +146,25 @@
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <h2 class="heading">Contact <span>Me</span></h2>
-        <form action="#">
+        
+        <!-- Replace YOUR_EMAIL_HERE with your actual email address -->
+        <form action="https://formsubmit.co/tterry616@gmail.com" method="POST">
+            
+            <!-- Optional: Hide the ReCaptcha and specify a success page -->
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://tangcheekinportfolio.vercel.app/"> <!-- Optional redirect -->
+
             <div class="input-box">
-                <input type="text" placeholder="Full Name">
-                <input type="email" placeholder="Email Address">
+                <!-- Added name attributes and 'required' so they can't send empty forms -->
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email Address" required>
             </div>
             <div class="input-box">
-                <input type="number" placeholder="Mobile Number">
-                <input type="text" placeholder="Email Subject">
+                <input type="number" name="phone" placeholder="Mobile Number">
+                <input type="text" name="subject" placeholder="Email Subject" required>
             </div>
-            <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
+            <!-- Added name attribute -->
+            <textarea name="message" id="" cols="30" rows="10" placeholder="Your Message" required></textarea>
             <input type="submit" value="Send Message" class="btn">
         </form>
     </section>
