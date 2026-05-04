@@ -114,6 +114,7 @@ span {
 .home-content p {
     font-size: 1.6rem;
     margin-bottom: 2rem;
+    text-align: justify;
 }
 
 .social-media a {
@@ -159,6 +160,26 @@ span {
     border-radius: 50%;
     border: 5px solid var(--main-color);
     box-shadow: 0 0 20px var(--main-color);
+}
+
+/* --- Home Button Box Styles --- */
+.btn-box {
+    display: flex;
+    gap: 2rem; /* Creates space between the two buttons */
+    margin-top: 2rem;
+}
+
+/* Secondary Button Style (Outline) */
+.btn.btn-secondary {
+    background: transparent;
+    color: var(--main-color);
+    border: .2rem solid var(--main-color);
+}
+
+/* Swap colors when hovering over the secondary button */
+.btn.btn-secondary:hover {
+    background: var(--main-color);
+    color: var(--second-bg-color);
 }
 
 /* --- General Sections Styling --- */
@@ -230,13 +251,18 @@ span {
 
 .timeline-item:nth-child(even) {
     left: 50%;
+    text-align: justify;
 }
 
 .timeline-item:nth-child(odd) {
     left: 0;
-    text-align: right;
+    text-align: justify;
     border-left: none;
     border-right: .2rem solid var(--main-color);
+}
+
+.timeline-item h4{
+    font-weight: 600;
 }
 
 .timeline-dot {
