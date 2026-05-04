@@ -242,11 +242,22 @@ span {
     margin: 0 auto;
 }
 
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: .2rem;
+    background: var(--main-color);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -.1rem; /* Centers the line perfectly */
+    z-index: 1;
+}
+
 .timeline-item {
     padding: 3rem 2rem;
     position: relative;
     width: 50%;
-    border-left: .2rem solid var(--main-color);
 }
 
 .timeline-item:nth-child(even) {
@@ -451,9 +462,29 @@ span {
     html {
         font-size: 55%;
     }
-    .timeline-item { width: 100%; border-left: .2rem solid var(--main-color); border-right: none;}
-    .timeline-item:nth-child(even), .timeline-item:nth-child(odd) { left: 0; text-align: left; }
-    .timeline-item:nth-child(odd) .timeline-dot, .timeline-item:nth-child(even) .timeline-dot { left: -1.1rem; }
+    
+    /* Move the single continuous line to the far left edge */
+    .timeline::after {
+        left: 0;
+        margin-left: 0;
+    }
+
+    .timeline-item { 
+        width: 100%; 
+    }
+    
+    .timeline-item:nth-child(even), 
+    .timeline-item:nth-child(odd) { 
+        left: 0; 
+        text-align: left; 
+    }
+
+    /* Ensure all dots align on the left side of the screen */
+    .timeline-item:nth-child(odd) .timeline-dot, 
+    .timeline-item:nth-child(even) .timeline-dot { 
+        left: -1rem; 
+        right: auto;
+    }
 }
 
 @media (max-width: 768px) {
