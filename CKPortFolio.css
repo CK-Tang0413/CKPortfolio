@@ -1,0 +1,2417 @@
+/* =========================================
+   VARIABLES & GLOBAL STYLES
+========================================= */
+:root {
+    --bg-color: #0f172a; 
+    --text-color: #f8fafc;
+    --primary-color: #3b82f6; 
+    --secondary-color: #f97316; 
+    --card-bg: #1e293b;
+    --nav-bg: rgba(15, 23, 42, 0.9);
+}
+
+body.light-mode {
+    --bg-color: #ffffff;
+    --text-color: #1e1e1e;
+    --primary-color: #8b5cf6; 
+    --secondary-color: #c4b5fd; 
+    --card-bg: #f3f4f6;
+    --nav-bg: rgba(255, 255, 255, 0.9);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+section {
+    padding: 100px 10%;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+/* =========================================
+   NAVIGATION BAR
+========================================= */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    
+    /* Glass Effect Properties */
+    background: rgba(15, 23, 42, 0.7); /* Dark semi-transparent background */
+    backdrop-filter: blur(12px);       /* The core blur effect */
+    -webkit-backdrop-filter: blur(12px); /* Safari support */
+    
+    /* Keep your existing padding/flex rules here */
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background 0.3s ease;
+}
+
+/* Light Mode Glass Effect */
+body.light-mode nav {
+    background: rgba(255, 255, 255, 0.7); /* Light semi-transparent background */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+#theme-toggle {
+    padding: 8px 15px;
+    cursor: pointer;
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 15px;
+}
+
+/* =========================================
+   DESKTOP DEFAULT overrides
+========================================= */
+/* Hide menu icon on desktop */
+.menu-icon {
+    display: none;
+    font-size: 2.2rem;
+    cursor: pointer;
+    color: var(--text-color);
+    z-index: 1001; /* Keeps it above the sidebar */
+    transition: transform 0.3s ease;
+}
+
+/* Optional: Slight rotation when clicking */
+.menu-icon:active i {
+    transform: scale(0.9);
+}
+
+/* =========================================
+   NAVIGATION LOGO STYLING
+========================================= */
+.logo {
+    font-size: 1.8rem; /* Increased size for impact */
+    font-weight: 800;  /* Bold weight */
+    letter-spacing: 1px;
+    
+    /* Apply the Gradient */
+    background: linear-gradient(90deg, #3b82f6, #f97316); /* Dark Mode Gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    
+    transition: transform 0.3s ease;
+}
+
+/* Light Mode Logo Gradient (Purple to Coral) */
+body.light-mode .logo {
+    background: linear-gradient(90deg, #7e22ce, #f43f5e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Added hover effect for extra polish */
+.logo:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.logo a{
+    text-decoration: none;
+}
+
+/* =========================================
+   THEME TOGGLE SWITCH
+========================================= */
+.theme-switch {
+    width: 64px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    outline: none;
+    padding: 0;
+}
+
+body.light-mode .theme-switch {
+    background: rgba(0, 0, 0, 0.05); /* Lighter track for light mode */
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* The Sliding Ball */
+.switch-ball {
+    width: 26px;
+    height: 26px;
+    background: var(--primary-color); /* Blue for Dark Mode */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 3px; 
+    /* Default Dark Mode: Ball is on the right side */
+    transform: translateX(30px); 
+    /* Cubic-bezier adds a slight "bounce" to the slide */
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), background 0.4s ease;
+    overflow: hidden; /* Hides the inactive icon */
+}
+
+/* Light Mode: Ball slides to the left and changes color */
+body.light-mode .switch-ball {
+    transform: translateX(0px); 
+    background: #f59e0b; /* Warm yellow/orange for the Sun */
+}
+
+/* Base Icon Styling */
+.switch-ball i {
+    position: absolute;
+    font-size: 1.15rem;
+    color: #fff;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* --- Dark Mode (Default) Animations --- */
+.moon-icon {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg); /* Moon is visible */
+}
+
+.sun-icon {
+    opacity: 0;
+    transform: translateY(20px) rotate(45deg); /* Sun is pushed down and rotated out */
+}
+
+/* --- Light Mode Animations --- */
+body.light-mode .moon-icon {
+    opacity: 0;
+    transform: translateY(-20px) rotate(-45deg); /* Moon pushes up and rotates away */
+}
+
+body.light-mode .sun-icon {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg); /* Sun slides up into view */
+}
+
+/* =========================================
+   LIGHT MODE TEXT READABILITY FIXES
+========================================= */
+
+/* Targets the descriptions in About, Timeline, and Projects */
+body.light-mode .about-desc,
+body.light-mode .timeline-right p,
+body.light-mode .accordion-content p {
+    color: #334155; /* A deep slate-gray that provides excellent contrast */
+    font-weight: 500; /* Slightly increases thickness for better readability on bright backgrounds */
+    line-height: 1.7; /* Ensures the text breathes nicely */
+}
+
+/* Fixes the subtitle on the Skills section if it is also washing out */
+body.light-mode .skills-subtitle,
+body.light-mode .card-details p {
+    color: #475569; 
+}
+
+/* =========================================
+   LIGHT MODE VIBRANT COLORS
+========================================= */
+
+/* The new Light Mode Gradient: Deep Purple to Vibrant Coral */
+body.light-mode .highlight-gradient {
+    background: linear-gradient(90deg, #7e22ce, #f43f5e); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Updates the solid bolded text (like your CGPA) to match the Deep Purple */
+body.light-mode .highlight-text {
+    color: #7e22ce; 
+}
+
+/* Gives the "Resume" button a transparent background with a purple outline in light mode */
+body.light-mode .btn-glow {
+    background: transparent;
+    border: 2px solid #7e22ce; /* Deep purple outline */
+    color: #7e22ce; /* Deep purple text and icon */
+    box-shadow: none; /* Keeps it clean without a glow when not hovered */
+}
+
+/* Fills the button with purple and adds the glow when hovered */
+body.light-mode .btn-glow:hover {
+    background: #7e22ce; /* Solid purple background */
+    color: #ffffff; /* White text for contrast */
+    box-shadow: 0 0 15px rgba(126, 34, 206, 0.4); /* Brings back the purple glow */
+}
+
+/* =========================================
+   LIGHT MODE HOVER GRADIENTS
+========================================= */
+
+/* 1. Social Icons Hover Gradient */
+body.light-mode .social-icons a:hover {
+    background: linear-gradient(90deg, #7e22ce, #f43f5e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    transform: scale(1.15); /* Keeps the pop-out animation */
+}
+
+/* 2. Contact Card Icon Hover Gradient */
+body.light-mode .contact-card:hover .contact-icon {
+    background: linear-gradient(90deg, #7e22ce, #f43f5e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    transform: scale(1.1);
+}
+
+/* 3. Contact Card Circular Arrow Hover */
+body.light-mode .contact-card:hover .contact-arrow {
+    background: linear-gradient(90deg, #7e22ce, #f43f5e);
+    color: #fff; /* Keeps the arrow itself pure white against the colorful background */
+    /* Note: The rotation animation is still handled by your base CSS! */
+}
+
+/* 4. Contact Form Submit Button Hover */
+body.light-mode .submit-btn:hover {
+    background: linear-gradient(90deg, #7e22ce, #f43f5e);
+    box-shadow: 0 0 15px rgba(244, 63, 94, 0.4); /* Adds a soft coral glow */
+    border-color: transparent;
+}
+
+/* =========================================
+   LIGHT MODE CAROUSEL DOTS
+========================================= */
+
+/* Darken inactive dots slightly for better contrast on white */
+body.light-mode .dot {
+    background: #cbd5e1; 
+}
+
+/* Make the active dot deep purple with a matching glow */
+body.light-mode .dot.active {
+    background: #7e22ce; 
+    box-shadow: 0 0 12px rgba(126, 34, 206, 0.6);
+}
+
+/* =========================================
+   HOME SECTION (Landing Page)
+========================================= */
+.landing {
+    position: relative;
+    height: 100vh; 
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10%;
+    overflow: hidden; 
+}
+
+.landing-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 55%; 
+    z-index: 2; 
+}
+
+.left-column {
+    align-items: flex-start;
+    flex: 1; 
+    animation: slideInLeft 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.center-column {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    height: 85%; 
+    justify-content: flex-end;
+    z-index: 1;
+    opacity: 0;
+    animation: fadeUpCenter 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+}
+
+.right-column {
+    align-items: flex-end;
+    text-align: right;
+    flex: 1; 
+    animation: slideInRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+    opacity: 0; 
+}
+
+.social-icons {
+    display: flex;
+    flex-direction: row; /* Changed from column to row for side-by-side layout */
+    gap: 20px; /* Slightly increased the gap to balance the larger icons */
+}
+
+.social-icons a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 2rem; /* Increased from 2rem to make them stand out more */
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+}
+
+.social-icons a:hover {
+    color: var(--primary-color);
+    transform: scale(1.15); 
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.title {
+    font-size: 4.5rem; 
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+/* --- Name Floating Animation --- */
+.left-column .title {
+    display: inline-block; /* Required for the transform to work smoothly on text */
+    animation: floatMotion 4s ease-in-out infinite; /* 4 second continuous loop */
+}
+
+/* The continuous up and down motion */
+@keyframes floatMotion {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px); /* Floats up by 15 pixels */
+    }
+    100% {
+        transform: translateY(0px); /* Returns to starting position */
+    }
+}
+
+.highlight-gradient {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.glow-effect {
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.25; 
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.profile-img {
+    height: 100%;
+    max-height: 900px;
+    object-fit: cover;
+    mask-image: linear-gradient(to top, transparent 0%, black 15%);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 15%);
+}
+
+.cursor {
+    display: inline-block;
+    width: 4px;
+    background-color: var(--secondary-color);
+    margin-left: 8px;
+    animation: blink 0.8s infinite;
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-80px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(80px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeUpCenter {
+    from { opacity: 0; transform: translate(-50%, 80px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+
+/* =========================================
+   ABOUT ME SECTION
+========================================= */
+.about-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; 
+    padding: 0 10%;
+    overflow: hidden;
+}
+
+.about-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 50px;
+}
+
+.about-image-wrapper {
+    position: relative;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 80vh;
+}
+
+.about-image-wrapper .glow-effect {
+    top: 50%;
+    width: 400px;
+    height: 400px;
+    opacity: 0.15;
+}
+
+.about-image-wrapper .profile-img {
+    height: 100%;
+    object-fit: cover;
+    mask-image: linear-gradient(to top, transparent 0%, black 15%);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 15%);
+}
+
+.about-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    gap: 25px;
+}
+
+.about-title {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    color: var(--text-color);
+    text-align: left;
+    margin-bottom: 0;
+}
+
+.about-desc {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #cbd5e1; 
+    text-align: justify;
+}
+
+.highlight-text {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.btn-glow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 35px;
+    background: transparent;
+    color: var(--text-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 40px; 
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.3rem;
+    transform: translateY(2px);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), inset 0 0 10px rgba(59, 130, 246, 0.1);
+}
+
+.btn-glow:hover {
+    background: var(--primary-color);
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.7), inset 0 0 15px rgba(59, 130, 246, 0.5);
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+.scroll-slide-left {
+    opacity: 0;
+    transform: translateX(30%); 
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-fade-up {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s; 
+}
+
+.scroll-slide-left.in-view,
+.scroll-fade-up.in-view {
+    opacity: 1;
+    transform: translate(0, 0); 
+}
+
+
+/* =========================================
+   EXPERIENCE & EDUCATION SECTION
+========================================= */
+.timeline-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 120px 10%;
+}
+
+.section-title {
+    font-size: 3rem;
+    line-height: 1.1;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    color: var(--text-color);
+}
+
+.toggle-bg {
+    background: rgba(255, 255, 255, 0.05); 
+    border-radius: 40px;
+    padding: 5px;
+    display: inline-flex;
+    margin-bottom: 4rem;
+}
+
+.toggle-btn {
+    padding: 12px 30px;
+    background: transparent;
+    color: var(--text-color);
+    border: none;
+    border-radius: 35px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.toggle-btn i {
+    font-size: 1.2rem;
+    vertical-align: middle; /* Keeps the icon perfectly centered with the text */
+    margin-left: 5px; /* Adds a small breathing space between the word and the icon */
+}
+
+.toggle-btn.active {
+    background: var(--primary-color);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+}
+
+.timeline-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.timeline-row {
+    display: flex;
+    min-height: 150px;
+}
+
+.timeline-left {
+    flex: 1;
+    text-align: left;
+    padding-right: 40px;
+    padding-bottom: 40px;
+}
+
+.timeline-left h3 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.company {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.timeline-center {
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timeline-date {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.timeline-line {
+    width: 2px;
+    flex-grow: 1; 
+    background: linear-gradient(to bottom, var(--primary-color) 0%, rgba(59, 130, 246, 0.1) 100%);
+}
+
+.last-line {
+    background: linear-gradient(to bottom, var(--primary-color) 0%, transparent 100%);
+    height: 100px;
+    flex-grow: 0;
+}
+
+.timeline-right {
+    flex: 1;
+    text-align: left;
+    padding-left: 40px;
+    padding-bottom: 40px;
+    color: #cbd5e1;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.fade-transition {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-out {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+/* =========================================
+   TIMELINE HOVER LINKS (Work & Education)
+========================================= */
+/* Dark Mode Default - Initially Blue */
+.timeline-link {
+    text-decoration: none;
+    color: #3b82f6; /* Changed from 'inherit' to make it stand out instantly */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* The external link icon - hidden by default */
+.timeline-link i {
+    font-size: 1.2rem;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    color: #3b82f6; 
+}
+
+/* Hover State - Adds underline and slides icon */
+.timeline-link:hover {
+    text-decoration: underline; /* Extra visual feedback when hovered */
+}
+
+.timeline-link:hover i {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* --- Light Mode Overrides --- */
+/* Light Mode Default - Initially Purple */
+body.light-mode .timeline-link,
+body.light-mode .timeline-link i {
+    color: #7e22ce; 
+}
+
+/* =========================================
+   ACHIEVEMENTS (Infinite Looping Cards)
+========================================= */
+.achievements-section {
+    padding: 100px 10%; /* Restored the 10% padding on the left and right to create a gap */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.carousel-container {
+    width: 100%;
+    max-width: 1200px; /* Limits the maximum width so it doesn't stretch too far on huge screens */
+    overflow: hidden;
+    padding: 30px 0;
+    position: relative;
+    /* Fades the cards out just before they hit the margins */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.carousel-track {
+    display: inline-flex;
+    gap: 25px; /* Slightly reduced gap between the smaller cards */
+    /* The animation translates by -50% to perfectly loop the two duplicated sets */
+    animation: infiniteScroll 25s linear infinite;
+}
+
+/* Pauses the ENTIRE track when the user hovers anywhere over it */
+.carousel-track:hover {
+    animation-play-state: paused !important;
+}
+
+/* --- Scaled-Down Card Styling --- */
+.achieve-card {
+    width: 310px; /* Reduced from 380px */
+    flex-shrink: 0;
+    /* Dark background blending into a purple glow at the bottom */
+    background: linear-gradient(180deg, var(--card-bg) 60%, rgba(139, 92, 246, 0.3) 100%);
+    border-radius: 20px; /* Slightly softer corners for smaller size */
+    padding: 25px 20px; /* Reduced inner padding */
+    display: flex;
+    flex-direction: column;
+    color: var(--text-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    white-space: normal; 
+}
+
+/* Top Header (01 & Tag) */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-num {
+    font-size: 2.5rem; /* Reduced from 3rem */
+    font-weight: 800;
+    line-height: 1;
+}
+
+.card-tag {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Card Typography */
+.achieve-card h3 {
+    font-size: 1.35rem; /* Reduced from 1.6rem */
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.card-details {
+    font-size: 0.9rem; /* Adjusted for readability on smaller card */
+    color: #cbd5e1;
+    margin-bottom: 25px;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+.card-details strong {
+    color: var(--text-color);
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Image Container & Hover Effects */
+.card-img-container {
+    margin-top: auto; 
+    position: relative;
+    border-radius: 12px; /* Adjusted border radius */
+    overflow: hidden;
+    height: 170px; /* Reduced from 220px to fit the new card proportions */
+    /* Creates the intense purple glow shadow directly under the image */
+    box-shadow: 0 12px 25px rgba(139, 92, 246, 0.4);
+    background-color: #000;
+}
+
+.card-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    opacity: 0.9;
+}
+
+/* Pop-up Arrow Symbol */
+.hover-icon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 40px; /* Slightly smaller icon */
+    height: 40px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    backdrop-filter: blur(5px);
+    
+    /* Animation start states */
+    opacity: 0;
+    transform: scale(0.5) translate(-10px, 10px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Triggers when the user hovers over the specific image */
+.card-img-container:hover img {
+    transform: scale(1.08); 
+    opacity: 1;
+}
+
+.card-img-container:hover .hover-icon {
+    opacity: 1;
+    transform: scale(1) translate(0, 0); 
+}
+
+/* Infinite Scrolling Keyframes */
+@keyframes infiniteScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 12.5px)); } /* Adjusted math for the new 25px gap */
+}
+
+/* --- Carousel Navigation Dots --- */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 15px;
+    z-index: 10;
+}
+
+/* =========================================
+   CAROUSEL DOTS ANIMATION
+========================================= */
+
+/* Base Dot (Inactive) */
+.dot {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.2); 
+    border-radius: 50%;
+    cursor: pointer;
+    /* This transition is the magic that creates the smooth fill/shrink effect */
+    transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s ease, box-shadow 0.4s ease;
+    display: inline-block;
+    margin: 0 5px;
+}
+
+/* Active Dot (Expands and lights up) */
+.dot.active {
+    width: 32px; /* Stretches into a pill shape */
+    background: var(--primary-color); 
+    border-radius: 8px; /* Keeps the edges rounded */
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+/* --- Light Mode Overrides --- */
+body.light-mode .dot {
+    background: #cbd5e1; /* Darker gray for inactive dots on white */
+}
+
+body.light-mode .dot.active {
+    background: #7e22ce; /* Deep purple fill */
+    width: 32px;
+    box-shadow: 0 0 12px rgba(126, 34, 206, 0.6);
+}
+
+.dot:hover {
+    background: rgba(59, 130, 246, 0.5); /* Lighter blue on hover */
+}
+
+/* =========================================
+   ACADEMIC PROJECTS (Custom Accordion)
+========================================= */
+.projects-section {
+    padding: 100px 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.accordion-container {
+    width: 100%;
+    max-width: 900px; /* Keeps the list centered and readable */
+    margin-top: 30px;
+}
+
+.accordion-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle divider */
+}
+
+/* Light mode specific border adjustments */
+body.light-mode .accordion-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+/* Hover effect for the entire row */
+.accordion-header:hover .project-title,
+.accordion-header:hover .project-icon {
+    color: var(--primary-color);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.project-icon {
+    font-size: 1.8rem;
+    color: var(--primary-color); /* Colored icon like the design */
+    transition: transform 0.3s ease;
+}
+
+.accordion-header:hover .project-icon {
+    transform: scale(1.1);
+}
+
+.project-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+/* The toggle chevron circle styling */
+.toggle-icon-bg {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+.accordion-header:hover .toggle-icon-bg {
+    background: rgba(59, 130, 246, 0.15); /* Subtle blue background on hover */
+}
+
+.toggle-icon {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    transition: transform 0.4s ease; /* Smooth rotation */
+}
+
+/* Rotates the arrow when the accordion is active */
+.accordion-item.active .toggle-icon {
+    transform: rotate(-180deg); 
+}
+
+/* Hidden Content Area Styling */
+.accordion-content {
+    /* Critical for smooth slide-down animation */
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+}
+
+.accordion-item.active .accordion-content {
+    opacity: 1;
+    /* max-height is injected via JS to ensure it animates correctly */
+}
+
+.content-inner {
+    padding-bottom: 40px;
+    padding-left: 60px; /* Aligns description text with the title, skipping the icon */
+}
+
+.content-inner p {
+    font-size: 1.05rem;
+    color: #cbd5e1;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+body.light-mode .content-inner p {
+    color: #4b5563;
+}
+
+/* =========================================
+   PROJECT TECH STACK BADGES
+========================================= */
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.tech-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.05); /* Subtle transparent white */
+    color: #e2e8f0; /* Light gray text for dark mode */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.tech-badge i {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.tech-badge:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+.tech-badge:hover i {
+    transform: scale(1.2); /* Makes the colored icon pop a bit on hover */
+}
+
+/* --- Official Brand Colors for Icons --- */
+.tech-badge .bxl-python { color: #3776ab; }       /* Python Blue */
+.tech-badge .bxl-java { color: #ea2d2e; }         /* Java Red/Orange */
+.tech-badge .bxl-javascript { color: #f7df1e; }   /* JavaScript Yellow */
+.tech-badge .bxl-html5 { color: #e34f26; }        /* HTML5 Orange */
+.tech-badge .bxl-css3 { color: #1572b6; }         /* CSS3 Blue */
+.tech-badge .bxl-php { color: #777bb4; }          /* PHP Purple */
+.tech-badge .bxs-data { color: #00758f; }         /* MySQL Blue */
+.tech-badge .bx-bot { color: #3b82f6; }           /* Botpress (Theme Blue) */
+.tech-badge .bx-layer { color: #ff5722; }         /* Joget DX Orange */
+
+/* --- Light Mode Overrides --- */
+body.light-mode .tech-badge {
+    background: rgba(0, 0, 0, 0.03); /* Subtle dark background */
+    color: #334155; /* Dark gray text */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .tech-badge:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================
+   SKILLS SECTION
+========================================= */
+.skills-section {
+    padding: 100px 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.skills-subtitle {
+    color: #cbd5e1;
+    margin-bottom: 50px;
+    text-align: center;
+    max-width: 600px;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+body.light-mode .skills-subtitle {
+    color: #4b5563;
+}
+
+.skills-container {
+    width: 100%;
+    max-width: 950px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Wide Card Styling */
+.skill-card {
+    background: var(--card-bg);
+    border-radius: 25px;
+    padding: 40px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    /* Subtle border to separate it from the background */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+body.light-mode .skill-card {
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.15);
+}
+
+/* Subtle glowing orb in the background of each card */
+.skill-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--primary-color) 0%, transparent 60%);
+    opacity: 0.08; 
+    pointer-events: none; /* Prevents the glow from blocking clicks/hovers */
+}
+
+/* Left Side: Category Title & Large Icon */
+.skill-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 35%;
+    z-index: 1; /* Keeps text above the glow */
+}
+
+.skill-icon {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+}
+
+.skill-left h3 {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+/* Right Side: Skill Items Grid */
+.skill-right {
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px 30px;
+    z-index: 1;
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #e2e8f0;
+    transition: color 0.3s ease, transform 0.3s ease;
+    cursor: default;
+}
+
+body.light-mode .skill-item {
+    color: #1e293b;
+}
+
+.skill-item:hover {
+    color: var(--primary-color);
+    transform: scale(1.05); /* Slight pop when hovered */
+}
+
+/* Change this from .skill-item span to .skill-item i */
+.skill-item i {
+    font-size: 1.4rem; /* Increased slightly so the icons match the text height perfectly */
+    transition: transform 0.3s ease;
+}
+
+/* Optional: adds a tiny bounce to just the icon when hovering over the skill */
+.skill-item:hover i {
+    transform: translateY(-2px);
+}
+
+/* --- Staggered Animation Delays --- */
+/* These classes hook into the .scroll-fade-up logic you already built */
+.delay-1 { transition-delay: 0.1s !important; }
+.delay-2 { transition-delay: 0.25s !important; }
+.delay-3 { transition-delay: 0.4s !important; }
+.delay-4 { transition-delay: 0.55s !important; }
+.delay-5 { transition-delay: 0.7s !important; }
+.delay-6 { transition-delay: 0.85s !important; }
+
+/* =========================================
+   SKILLS SECTION ICON COLORS
+========================================= */
+/* Add a smooth hover pop effect to all skill icons */
+.skill-item i {
+    transition: transform 0.3s ease;
+}
+
+.skill-item:hover i {
+    transform: scale(1.2);
+}
+
+/* --- Category 1: Programming & Tech (Official Brand Colors) --- */
+.skill-item .bxl-python { color: #3776ab; }       /* Python Blue */
+.skill-item .bxl-java { color: #ea2d2e; }         /* Java Red */
+.skill-item .bxl-html5 { color: #e34f26; }        /* HTML5 Orange */
+.skill-item .bxl-css3 { color: #1572b6; }         /* CSS3 Blue */
+.skill-item .bxl-javascript { color: #f7df1e; }   /* JavaScript Yellow */
+.skill-item .bxl-php { color: #777bb4; }          /* PHP Purple */
+.skill-item .bx-data { color: #0284c7; }          /* Generic SQL Light Blue */
+.skill-item .bxs-data { color: #00758f; }         /* MySQL Dark Blue */
+
+/* --- Category 2: Tools & Design (Official Brand Colors) --- */
+.skill-item .bxl-figma { color: #F24E1E; }        /* Figma Orange/Red */
+.skill-item .bx-pen { color: #f59e0b; }           /* Draw.io Orange */
+.skill-item .bx-chalkboard { color: #FFD02F; }    /* Miro Yellow */
+.skill-item .bx-bot { color: #10a37f; }           /* AI/ChatGPT Green */
+
+/* --- Category 3: Soft Skills & Core (Thematic UI Colors) --- */
+.skill-item .bx-group { color: #8b5cf6; }         /* Purple for Collaboration */
+.skill-item .bx-target-lock { color: #ef4444; }   /* Red for Target/Leadership */
+.skill-item .bx-cog { color: #64748b; }           /* Slate Gray for DevOps */
+.skill-item .bx-bar-chart-alt-2 { color: #10b981; } /* Emerald Green for Organization */
+.skill-item .bx-briefcase { color: #f97316; }     /* Orange for Work Ethic */
+
+/* --- Category 4: Languages (Thematic Colors based on Flags) --- */
+.skill-item .bx-message-rounded-dots { color: #ef4444; } /* Red for Chinese */
+.skill-item .bx-message-rounded { color: #3b82f6; }      /* Blue for English */
+.skill-item .bx-message-dots { color: #f59e0b; }         /* Yellow/Gold for Malay */
+
+/* =========================================
+   CONTACT SECTION
+========================================= */
+.contact-section {
+    padding: 100px 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-container {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    gap: 60px;
+    margin-top: 20px;
+}
+
+/* --- Left Side: Form Elements --- */
+.contact-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* NEW: Groups inputs side-by-side */
+.input-row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.contact-input {
+    width: 100%;
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-color);
+    padding: 20px 25px;
+    border-radius: 30px; /* Deep pill shape */
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+body.light-mode .contact-input {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.contact-input.textarea {
+    border-radius: 20px; /* Slightly less rounded for text areas */
+    resize: vertical;
+}
+
+.contact-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+}
+
+/* =========================================
+   CONTACT FORM PLACEHOLDER COLOR
+========================================= */
+
+/* Dark Mode: Brighter placeholder text for better readability */
+.contact-input::placeholder {
+    color: #94a3b8; 
+    opacity: 1; /* Ensures browsers don't lower the opacity by default */
+}
+
+/* Light Mode: Darker placeholder text for better readability on white */
+body.light-mode .contact-input::placeholder {
+    color: #64748b; 
+}
+
+/* Submit Button */
+.submit-btn {
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    border: none;
+    padding: 20px 30px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 25px rgba(59, 130, 246, 0.5);
+}
+
+/* --- Right Side: Contact Info Cards --- */
+.contact-info-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--card-bg);
+    padding: 20px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+body.light-mode .contact-card {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.contact-card:hover {
+    transform: translateX(10px); /* Slides right on hover */
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.15);
+}
+
+.contact-card-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.contact-icon {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+/* Optional: Slight pop when hovering over the card & gradient color */
+.contact-card:hover .contact-icon {
+    transform: scale(1.1);
+    /* Apply gradient to the icon text */
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.contact-label {
+    font-size: 0.85rem;
+    color: #cbd5e1;
+    font-weight: 600;
+}
+
+body.light-mode .contact-label {
+    color: #64748b;
+}
+
+.contact-value {
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+/* Base arrow container: Equal width/height + 50% border-radius creates the circle */
+.contact-arrow {
+    width: 45px;  /* Fixed equal width... */
+    height: 45px; /* ...and height */
+    border-radius: 50%; /* Makes it a perfect circle */
+    background: rgba(255, 255, 255, 0.05); /* Subtle background when not hovered */
+    color: var(--text-color);
+    display: flex;
+    justify-content: center; /* Centers the icon horizontally */
+    align-items: center;     /* Centers the icon vertically */
+    transition: all 0.3s ease;
+}
+
+body.light-mode .contact-arrow {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* Make sure the Boxicon inside is sized nicely */
+.contact-arrow i {
+    font-size: 1.5rem;
+}
+
+/* The hover state (background changes, stays a circle, and rotates) */
+.contact-card:hover .contact-arrow {
+    /* Apply gradient to the circle background */
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    transform: rotate(-45deg); 
+}
+
+
+
+/* =========================================
+   IMAGE LIGHTBOX MODAL
+========================================= */
+/* The hidden modal background */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; 
+    z-index: 9999; /* Ensures it sits on top of absolutely everything, including the navbar */
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.85); /* Dark overlay */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Class added via JS to fade it in */
+.modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+/* The actual popped-up image */
+.modal-content {
+    max-width: 90%;
+    max-height: 90vh;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+/* Slight zoom-in effect when opened */
+.modal.show .modal-content {
+    transform: scale(1);
+}
+
+/* The Close Button */
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 45px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: var(--primary-color);
+}
+
+/* Utility class to pause the carousel */
+.pause-animation {
+    animation-play-state: paused !important;
+}
+
+/* Make sure the images on the cards look clickable */
+.carousel-track img {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.carousel-track img:hover {
+    transform: scale(1.03); /* Slight zoom on hover to indicate it can be clicked */
+}
+
+.modal-content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+/* Hide arrows by default */
+.modal-nav {
+    display: none; /* Changed from absolute/visible to none */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.3); /* Added slight background for better touch */
+    border: none;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    z-index: 1000;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+/* This class will be added by JS to show the arrows */
+.modal-nav.show-nav {
+    display: block;
+}
+
+.modal-nav.prev { left: 20px; }
+.modal-nav.next { right: 20px; }
+
+/* =========================================
+   BACK TO TOP (Glass + Gradient Border)
+========================================= */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    
+    /* 1. Set a transparent border to make room for the gradient */
+    border: 2px solid transparent; 
+    
+    /* 2. The Background Trick: Dark Glass center + Blue/Orange Gradient Border */
+    background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)) padding-box,
+                linear-gradient(90deg, #3b82f6, #f97316) border-box;
+                
+    /* Glass Effect Blur */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease, bottom 0.2s ease; /* Added bottom transition */
+    z-index: 800; /* Lowered slightly below modal/nav */
+}
+
+/* --- Light Mode Variations --- */
+body.light-mode .back-to-top {
+    /* Light Glass center + Purple/Coral Gradient Border */
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)) padding-box,
+                linear-gradient(90deg, #7e22ce, #f43f5e) border-box;
+    color: #7e22ce; /* Purple icon */
+}
+
+/* --- Hover Effects --- */
+/* Fills the entire button with the solid gradient and bounces up */
+.back-to-top:hover {
+    background: linear-gradient(90deg, #3b82f6, #f97316) border-box; 
+    color: #fff;
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+}
+
+body.light-mode .back-to-top:hover {
+    background: linear-gradient(90deg, #7e22ce, #f43f5e) border-box;
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(126, 34, 206, 0.4);
+}
+
+/* Show when in-view class is toggled by JS */
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* =========================================
+   FOOTER SECTION
+========================================= */
+footer {
+    padding: 2rem 5%;
+    text-align: center;
+    background: rgba(15, 23, 42, 0.5); /* Semi-transparent */
+    backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+}
+
+body.light-mode footer {
+    background: rgba(255, 255, 255, 0.7);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: #64748b;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-content p {
+    color: #fff;
+}
+
+body.light-mode .footer-content p {
+    color: #000;
+}
+
+/* =========================================
+   FOOTER SIGNATURE
+========================================= */
+.footer-signature {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #64748b;
+    margin: 0;
+}
+
+/* Optional: Make the signature appear as a gradient for a premium touch */
+.footer-signature {
+    background: linear-gradient(90deg, #3b82f6, #f97316);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    font-weight: 600;
+}
+
+/* Match Light Mode */
+body.light-mode .footer-signature {
+    background: linear-gradient(90deg, #7e22ce, #f43f5e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+/* =========================================
+   RESPONSIVE: Tablets (Max 768px)
+========================================= */
+@media (max-width: 768px) {
+    /* =========================================
+    RESPONSIVE: Navbar (Max 768px)
+    ========================================= */
+    /* Rearrange the Nav bar using Flexbox */
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        order: 1; /* Keep logo on the left */
+    }
+
+    #theme-toggle {
+        order: 2; /* Put theme toggle next to hamburger */
+        margin-left: auto; /* Pushes toggle and menu to the right */
+        margin-right: 15px; 
+    }
+
+    .menu-icon {
+        display: block; /* Show hamburger */
+        order: 3; 
+        position: relative;
+    }
+
+    /* -----------------------------------
+       THE GLASS SIDEBAR
+    ------------------------------------ */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Hidden completely to the right by default */
+        width: 75%;
+        max-width: 320px;
+        height: 100vh;
+        
+        /* Glassmorphism Effect */
+        background: rgba(15, 23, 42, 0.7); 
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        
+        /* Layout matching the reference image */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding-left: 10%;
+        
+        /* Smooth slide-in animation */
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000; /* Just below the 'X' icon */
+    }
+
+    /* Light Mode Sidebar */
+    body.light-mode .nav-links {
+        background: rgba(255, 255, 255, 0.75); 
+        border-left: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    /* Triggered by JS to slide in */
+    .nav-links.active {
+        right: 0;
+    }
+
+    /* -----------------------------------
+       SIDEBAR LINKS & ANIMATION
+    ------------------------------------ */
+    .nav-links li {
+        margin: 18px 0;
+        
+        /* Initial state for the fade-in animation */
+        opacity: 0;
+        transform: translateX(30px);
+        transition: all 0.4s ease;
+    }
+
+    .nav-links li a {
+        font-size: 1.5rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Recreating the dot indicator from the reference image */
+    .nav-links li a::before {
+        content: '';
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        margin-right: 15px;
+        
+        /* Hidden by default */
+        opacity: 0;
+        transform: scale(0);
+        transition: all 0.3s ease;
+    }
+
+    /* Show the dot on hover */
+    .nav-links li a:hover::before {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Staggered Animation: Delays each link sliding in */
+    .nav-links.active li {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .nav-links.active li:nth-child(1) { transition-delay: 0.1s; }
+    .nav-links.active li:nth-child(2) { transition-delay: 0.15s; }
+    .nav-links.active li:nth-child(3) { transition-delay: 0.2s; }
+    .nav-links.active li:nth-child(4) { transition-delay: 0.25s; }
+    .nav-links.active li:nth-child(5) { transition-delay: 0.3s; }
+    .nav-links.active li:nth-child(6) { transition-delay: 0.35s; }
+    .nav-links.active li:nth-child(7) { transition-delay: 0.4s; }
+
+    /* =========================================
+       RESPONSIVE: HOME / LANDING (Max 768px)
+    ========================================= */
+    .landing {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 120px 5% 60px; /* Top padding clears the mobile navbar */
+        position: relative;
+        min-height: 100vh;
+        overflow-x: hidden; /* Prevents horizontal scroll from absolute elements */
+    }
+
+    /* --- 1. Intro Text (Top Left) --- */
+    .landing .left-column {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; 
+        margin-bottom: 5px;
+        position: static; 
+    }
+
+    .intro-text {
+        text-align: left;
+    }
+
+    .intro-text .subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+
+    .intro-text .title {
+        font-size: 3.2rem; 
+        line-height: 1.1;
+        letter-spacing: -1px;
+    }
+
+    /* --- 2. Social Icons (Vertical Stack on the left) --- */
+    /* Pulling this out of the standard flow to hover on the left edge */
+    .social-icons {
+        position: absolute;
+        left: 5%;
+        top: 500%; 
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column; /* Stacks them vertically */
+        z-index: 10; 
+    }
+
+    .social-icons a i {
+        font-size: 1.8rem;
+        color: var(--text-color); /* A nice visible gray for dark mode */
+        transition: color 0.3s ease;
+    }
+
+/* --- 3. Center Profile Image & Glow (Larger, Uncut Version) --- */
+    .landing .center-column {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .profile-img {
+        width: 100%;         /* Takes up the maximum available screen width */
+        max-width: 480px;    /* Significantly increased from 350px */
+        height: auto;        
+        object-fit: contain; 
+        z-index: 2;
+        transform: scale(1.1);
+    }
+    
+    /* We also need to enlarge the glow effect so it matches the new image size */
+    .glow-effect {
+        width: 320px;
+        height: 320px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* --- 4. Role Text (Bottom Center) --- */
+    .landing .right-column {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 3;
+    }
+
+    .role-text {
+        text-align: center;
+        margin-top: -15px; /* Pulls text slightly up to overlap the image base, matching the design */
+    }
+
+    .role-text .subtitle {
+        font-size: 1.6rem;
+        color: #8b5cf6; /* Uses a purple/blue tone to match the reference */
+        margin-bottom: 2px;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    .role-text .title {
+        font-size: 2.8rem;
+    }
+
+    /* =========================================
+       RESPONSIVE: ABOUT SECTION (Max 768px)
+    ========================================= */
+    .about-container {
+        display: flex;
+        flex-direction: column-reverse; /* Flips the HTML order: Text on top, Image on bottom */
+        align-items: center;
+        gap: 40px;
+        padding-top: 40px;
+    }
+
+    /* --- 1. Text Container (Top) --- */
+    .about-text {
+        width: 100%;
+        text-align: left; /* Aligns all text to the left matching the reference */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Ensures the button aligns to the left too */
+    }
+
+    .about-title {
+        font-size: 2.2rem;
+        line-height: 1.2;
+        margin-bottom: 20px;
+        letter-spacing: -0.5px;
+    }
+
+    .about-desc {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        color: #94a3b8; 
+        margin-bottom: 30px;
+    }
+
+    /* --- 2. Resume Button Styling (Matching the Reference) --- */
+    .about-text .btn-glow {
+        margin-top: 0;
+        padding: 12px 28px;
+        border-radius: 30px;
+        border: 2px solid #8b5cf6; /* Adds the solid purple border */
+        background: rgba(139, 92, 246, 0.1); /* Subtle purple background tint */
+        box-shadow: 0 0 20px rgba(139, 92, 246, 0.4); /* Recreates the outer glow */
+        font-size: 1rem;
+        font-weight: 700;
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    body.light-mode .about-text .btn-glow {
+        color: #334155;
+    }
+
+    /* --- 3. Bottom Profile Image --- */
+    .about-image-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        margin-top: 5px;
+    }
+
+    .about-image-wrapper .profile-img {
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+        object-fit: contain; /* Prevents the cropping issue here as well */
+        z-index: 2;
+        transform: scale(1.1);
+    }
+
+/* =========================================
+       RESPONSIVE: EXPERIENCE & EDUCATION
+    ========================================= */
+    .timeline-section {
+        padding: 60px 5% 40px;
+    }
+
+    /* --- 1. The Pill Toggle Buttons --- */
+    .toggle-container {
+        margin-bottom: 40px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .toggle-bg {
+        background: rgba(255, 255, 255, 0.05); /* Subtle dark glass pill */
+        border-radius: 40px;
+        padding: 5px;
+        display: flex;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    body.light-mode .toggle-bg {
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+    .toggle-btn {
+        flex: 1; /* Splits the space 50/50 */
+        padding: 12px 10px;
+        font-size: 1rem;
+        border-radius: 35px;
+        color: #94a3b8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        background: transparent;
+        border: none;
+    }
+
+    .toggle-btn.active {
+        background: var(--primary-color);
+        color: #fff; 
+        font-weight: 600;
+        box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); /* Optional: Adds the nice desktop glow */
+    }
+
+    /* --- 2. The Timeline Layout --- */
+    .timeline-container {
+        position: relative;
+        padding-left: 25px; /* Creates space for the new left edge line */
+    }
+
+    /* Draws a continuous theme-colored line on the far left edge */
+    .timeline-container::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(180deg, var(--primary-color) 0%, transparent 100%);
+    }
+
+    .timeline-row {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        position: relative; /* Allows us to anchor the date to the top right */
+        margin-bottom: 45px;
+        width: 100%;
+    }
+
+    /* --- 3. Left Column (Title & Company) --- */
+    .timeline-left {
+        width: 100%;
+        padding-right: 70px; /* Ensures long job titles don't overlap the right-aligned date */
+    }
+
+    .timeline-left h3 {
+        font-size: 1.6rem;
+        line-height: 1.2;
+        margin-bottom: 5px;
+        color: var(--text-color); /* Automatically adapts to light/dark mode */
+    }
+
+    /* Styles the company/school name using your theme color */
+    .timeline-left .company {
+        font-size: 1rem;
+        color: var(--primary-color); 
+        font-weight: 500;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+
+    /* Hide the long text duration on mobile */
+    .timeline-left .duration {
+        display: block; /* Overrides the previous 'display: none' */
+        font-size: 0.85rem;
+        margin-top: -5px; /* Pulls it slightly closer to the company name */
+    }
+
+    /* --- 4. The Date (Moved to Top Right) --- */
+    .timeline-center {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: block; /* Overrides previous mobile hidden rules */
+        width: auto;
+    }
+
+    /* Hide the horizontal line used on the desktop view */
+    .timeline-center .timeline-line {
+        display: none; 
+    }
+
+    /* Styles the short year into the big bold text */
+    .timeline-center .timeline-date {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--text-color); /* Automatically adapts to light/dark mode */
+        background: none; 
+        padding: 0;
+        box-shadow: none;
+    }
+
+    /* --- 5. The Description Text --- */
+    .timeline-right {
+        width: 100%;
+        padding-left: 0; /* Resets desktop padding */
+    }
+
+    .timeline-right p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    /* =========================================
+       RESPONSIVE: SKILLS SECTION (Max 768px)
+    ========================================= */
+    .skills-section {
+        padding: 60px 5% 40px;
+    }
+
+    .skills-subtitle {
+        font-size: 0.95rem;
+        padding: 0 10px;
+    }
+
+    /* Stack the left and right sides vertically */
+    .skill-card {
+        flex-direction: column; 
+        align-items: center;
+        text-align: center;
+        padding: 30px 20px;
+        gap: 20px;
+    }
+
+    /* Format the Category Header (Top) */
+    .skill-left {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+        /* Remove the desktop right-border and replace it with a bottom-border */
+        border-right: none; 
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+        
+        padding-right: 0;
+        padding-bottom: 20px;
+    }
+
+    /* Light mode override for the new horizontal divider */
+    body.light-mode .skill-left {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    /* Center the skill items below the divider */
+    .skill-right {
+        width: 100%;
+        justify-content: center; /* Centers the badges horizontally */
+        padding-left: 0;
+    }
+
+    /* =========================================
+       RESPONSIVE: CONTACT SECTION (Max 768px)
+    ========================================= */
+    .contact-section {
+        padding: 60px 5% 90px;
+    }
+
+    /* --- 1. Stack the Form and Info Cards --- */
+    .contact-container {
+        display: flex;
+        flex-direction: column; /* Stacks the form on top of the info cards */
+        gap: 40px; /* Adds breathing room between the form and the cards below it */
+    }
+
+    /* Ensure both sides take up the full screen width */
+    .contact-form,
+    .contact-info-wrapper {
+        width: 100%;
+    }
+
+    /* --- 2. Stack the Form Inputs --- */
+    /* On desktop, Name/Email and Phone/Subject sit side-by-side. 
+       On mobile, we stack them so they are wide enough to type in easily. */
+    .input-row {
+        display: flex;
+        flex-direction: column;
+        gap: 15px; 
+    }
+
+    /* Adjust padding for the submit button to fit perfectly */
+    .submit-btn {
+        width: 100%; /* Makes the button span the full width of the form */
+        padding: 15px;
+    }
+
+    /* =========================================
+       RESPONSIVE: BACK TO TOP BUTTON (Max 768px)
+    ========================================= */
+    .back-to-top {
+        width: 60px;  /* Slightly smaller for mobile */
+        height: 60px;
+        font-size: 1.5rem;
+    }
+}
+
+/* =========================================
+   RESPONSIVE: SMALL MOBILE (Max 430px)
+========================================= */
+@media (max-width: 430px) {
+    
+    /* --- General Typography & Spacing --- */
+    .section-title {
+        font-size: 2rem; /* Scales down all section titles */
+    }
+
+    /* --- Landing Section --- */
+    .intro-text .title {
+        font-size: 2.5rem; /* Shrunk from 3.2rem */
+    }
+
+    .role-text .subtitle {
+        font-size: 1.3rem;
+    }
+
+    .role-text .title {
+        font-size: 2.2rem; /* Shrunk from 2.8rem */
+    }
+
+    /* Scale the glow effect down so it doesn't bleed off the edges */
+    .glow-effect {
+        width: 260px;
+        height: 260px;
+    }
+
+    /* --- About Section --- */
+    .about-title {
+        font-size: 1.8rem;
+    }
+
+    .about-desc {
+        font-size: 1rem; /* Shrunk from 1.2rem for easier mobile reading */
+    }
+
+    /* --- Experience & Education --- */
+    .toggle-btn {
+        font-size: 0.85rem; /* Slightly smaller text in the pills */
+        padding: 10px 5px;
+    }
+
+    .timeline-left {
+        padding-right: 55px; /* Adjusted to match the smaller date */
+    }
+
+    .timeline-left h3 {
+        font-size: 1.3rem;
+    }
+
+    .timeline-center .timeline-date {
+        font-size: 1.4rem; /* Shrunk from 1.8rem */
+    }
+
+    /* --- Skills Section --- */
+    .skill-card {
+        padding: 20px 15px; /* Tighter padding for small screens */
+    }
+    
+    .skill-left h3 {
+        font-size: 1.3rem;
+    }
+
+    .skill-item {
+        font-size: 0.9rem; /* Smaller text for the skill badges */
+    }
+
+    /* --- Contact Section --- */
+    .contact-card {
+        padding: 15px; /* Tighter padding */
+    }
+
+    .contact-icon {
+        font-size: 1.5rem;
+    }
+
+    .contact-details {
+        gap: 2px;
+    }
+
+    .contact-label {
+        font-size: 0.75rem;
+    }
+
+    .contact-value {
+        font-size: 0.9rem;
+    }
+
+    /* Shrinks the circular arrow container slightly */
+    .contact-arrow {
+        width: 35px;
+        height: 35px;
+    }
+
+    .contact-arrow i {
+        font-size: 1.2rem;
+    }
+
+    /* --- Back to Top Button --- */
+    /* Shrinks the button from 60px to a more mobile-friendly 45px */
+    .back-to-top {
+        width: 45px;  
+        height: 45px;
+        font-size: 1.2rem;
+        bottom: 15px;
+        right: 15px;
+    }
+}
