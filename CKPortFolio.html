@@ -6,6 +6,7 @@
     <title>Portfolio | TANG CHEE KIN</title>
     <link rel="stylesheet" href="CKPortFolio.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 <body>
     <!-- Navigation -->
@@ -225,174 +226,98 @@
     <section id="achievements" class="achievements-section">
         <h2 class="section-title">My Incredible<br><span class="highlight-gradient">Achievements</span></h2>
         
-        <div class="carousel-container">
-            <div class="carousel-track">
-                
-                <!-- ================= FIRST SET OF CARDS ================= -->
+        <!-- Swiper Container -->
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
                 
                 <!-- Card 1 -->
-                <div class="achieve-card">
-                    <div class="card-header">
-                        <span class="card-num">01</span>
-                        <span class="card-tag">Competition</span>
-                    </div>
-                    <h3>FINALIST AWS CENDEKIAWAN AI APPLICATION</h3>
-                    <div class="card-details">
-                        <p><strong>Finalist | April - May 2026</strong></p>
-                        <p>Project: Anti Scam Malaysia | An AI-powered application to perform scam analysis (AWS BedRock).</p>
-                    </div>
-                    <div class="card-img-container">
-                        <a href="#aws-link">
-                            <img src="img/AWS E-Cert.png" alt="AWS Competition">
-                            <div class="hover-icon">↗</div>
-                        </a>
+                <div class="swiper-slide">
+                    <div class="achieve-card">
+                        <div class="card-header">
+                            <span class="card-num">01</span>
+                            <span class="card-tag">Competition</span>
+                        </div>
+                        <h3>FINALIST AWS CENDEKIAWAN AI APPLICATION</h3>
+                        <div class="card-details">
+                            <p><strong>Finalist | April - May 2026</strong></p>
+                            <p>Project: Anti Scam Malaysia | An AI-powered application to perform scam analysis (AWS BedRock).</p>
+                        </div>
+                        <div class="card-img-container">
+                            <a href="javascript:void(0);">
+                                <img src="img/AWS E-Cert.png" alt="AWS Competition">
+                                <div class="hover-icon">↗</div>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Card 2 -->
-                <div class="achieve-card">
-                    <div class="card-header">
-                        <span class="card-num">02</span>
-                        <span class="card-tag">Program</span>
-                    </div>
-                    <h3>AWS AI & ML SCHOLARS PROGRAM</h3>
-                    <div class="card-details">
-                        <p><strong>April - June 2026</strong></p>
-                        <p>Self-learning Course with nine chapters and two hands-on projects of AI and Machine Learning.</p>
-                    </div>
-                    <div class="card-img-container">
-                        <a href="#scholar-link">
-                            <img src="img/AWS Self-Learning Cert.png" alt="AWS Scholars Program">
-                            <div class="hover-icon">↗</div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="achieve-card">
-                    <div class="card-header">
-                        <span class="card-num">03</span>
-                        <span class="card-tag">Certification</span>
-                    </div>
-                    <h3>RED HAT SYSTEM ADMINISTRATION</h3>
-                    <div class="card-details">
-                        <p><strong>Part 1 & 2 | April - July 2026</strong></p>
-                        <p>Self-learning Course with 40 chapters of Linux and RHEL Knowledge.</p>
-                    </div>
-                    <div class="card-img-container">
-                        <a href="#redhat-link">
-                            <img src="img/RedHat Part 2 Cert.png" class="redhat-cert" alt="Red Hat Certification">
-                            <div class="hover-icon">↗</div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="achieve-card">
-                    <div class="card-header">
-                        <span class="card-num">04</span>
-                        <span class="card-tag">Hackathon</span>
-                    </div>
-                    <h3>Hack-Attack 2025</h3>
-                    <div class="card-details">
-                        <p><strong>May - July 2025</strong></p>
-                        <p>Idea Proposed: Talent Acquisition System with AI Technologies.</p>
-                    </div>
-                    <div class="card-img-container">
-                        <a href="#hackathon-link">
-                            <img src="img/HackAttack E-Cert.jpeg" alt="Hack Attack 2025">
-                            <div class="hover-icon">↗</div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- ================= SECOND SET OF CARDS (For Infinite Loop) ================= -->
-                
-                <!-- Card 1 -->
-                <div class="achieve-card">
-                    <div class="card-header">
-                        <span class="card-num">01</span>
-                        <span class="card-tag">Competition</span>
-                    </div>
-                    <h3>FINALIST AWS CENDEKIAWAN AI APPLICATION</h3>
-                    <div class="card-details">
-                        <p><strong>Finalist | April - May 2026</strong></p>
-                        <p>Project: Anti Scam Malaysia | An AI-powered application to perform scam analysis (AWS BedRock).</p>
-                    </div>
-                    <div class="card-img-container">
-                        <a href="#aws-link">
-                            <img src="img/AWS E-Cert.png" alt="AWS Competition">
-                            <div class="hover-icon">↗</div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="achieve-card">
-                    <div class="card-header">
-                        <span class="card-num">02</span>
-                        <span class="card-tag">Program</span>
-                    </div>
-                    <h3>AWS AI & ML SCHOLARS PROGRAM</h3>
-                    <div class="card-details">
-                        <p><strong>April - June 2026</strong></p>
-                        <p>Self-learning Course with nine chapters and two hands-on projects of AI and Machine Learning.</p>
-                    </div>
-                    <div class="card-img-container">
-                        <a href="#scholar-link">
-                            <img src="img/AWS Self-Learning Cert.png" alt="AWS Scholars Program">
-                            <div class="hover-icon">↗</div>
-                        </a>
+                <div class="swiper-slide">
+                    <div class="achieve-card">
+                        <div class="card-header">
+                            <span class="card-num">02</span>
+                            <span class="card-tag">Program</span>
+                        </div>
+                        <h3>AWS AI & ML SCHOLARS PROGRAM</h3>
+                        <div class="card-details">
+                            <p><strong>April - June 2026</strong></p>
+                            <p>Self-learning Course with nine chapters and two hands-on projects of AI and Machine Learning.</p>
+                        </div>
+                        <div class="card-img-container">
+                            <a href="javascript:void(0);">
+                                <img src="img/AWS Self-Learning Cert.png" alt="AWS Scholars Program">
+                                <div class="hover-icon">↗</div>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Card 3 -->
-                <div class="achieve-card">
-                    <div class="card-header">
-                        <span class="card-num">03</span>
-                        <span class="card-tag">Certification</span>
-                    </div>
-                    <h3>RED HAT SYSTEM ADMINISTRATION</h3>
-                    <div class="card-details">
-                        <p><strong>Part 1 & 2 | April - July 2026</strong></p>
-                        <p>Self-learning Course with 40 chapters of Linux and RHEL Knowledge.</p>
-                    </div>
-                    <div class="card-img-container">
-                        <a href="#redhat-link">
-                            <img src="img/RedHat Part 2 Cert.png" class="redhat-cert" alt="Red Hat Certification">
-                            <div class="hover-icon">↗</div>
-                        </a>
+                <div class="swiper-slide">
+                    <div class="achieve-card">
+                        <div class="card-header">
+                            <span class="card-num">03</span>
+                            <span class="card-tag">Certification</span>
+                        </div>
+                        <h3>RED HAT SYSTEM ADMINISTRATION</h3>
+                        <div class="card-details">
+                            <p><strong>Part 1 & 2 | April - July 2026</strong></p>
+                            <p>Self-learning Course with 40 chapters of Linux and RHEL Knowledge.</p>
+                        </div>
+                        <div class="card-img-container">
+                            <a href="javascript:void(0);">
+                                <img src="img/RedHat Part 2 Cert.png" class="redhat-cert" alt="Red Hat Certification">
+                                <div class="hover-icon">↗</div>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Card 4 -->
-                <div class="achieve-card">
-                    <div class="card-header">
-                        <span class="card-num">04</span>
-                        <span class="card-tag">Hackathon</span>
-                    </div>
-                    <h3>Hack-Attack 2025</h3>
-                    <div class="card-details">
-                        <p><strong>May - July 2025</strong></p>
-                        <p>Idea Proposed: Talent Acquisition System with AI Technologies.</p>
-                    </div>
-                    <div class="card-img-container">
-                        <a href="#hackathon-link">
-                            <img src="img/HackAttack E-Cert.jpeg" alt="Hack Attack 2025">
-                            <div class="hover-icon">↗</div>
-                        </a>
+                <div class="swiper-slide">
+                    <div class="achieve-card">
+                        <div class="card-header">
+                            <span class="card-num">04</span>
+                            <span class="card-tag">Hackathon</span>
+                        </div>
+                        <h3>Hack-Attack 2025</h3>
+                        <div class="card-details">
+                            <p><strong>May - July 2025</strong></p>
+                            <p>Idea Proposed: Talent Acquisition System with AI Technologies.</p>
+                        </div>
+                        <div class="card-img-container">
+                            <a href="javascript:void(0);">
+                                <img src="img/HackAttack E-Cert.jpeg" alt="Hack Attack 2025">
+                                <div class="hover-icon">↗</div>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
             </div>
-        </div>
-
-        <!-- NEW: Carousel Navigation Dots -->
-        <div class="carousel-dots">
-            <span class="dot active" data-index="0"></span>
-            <span class="dot" data-index="1"></span>
-            <span class="dot" data-index="2"></span>
-            <span class="dot" data-index="3"></span>
+            
+            <!-- NEW: Swiper Native Pagination Dots -->
+            <div class="swiper-pagination"></div>
         </div>
     </section>
 
@@ -711,6 +636,7 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="CKPortFolio.js"></script>
 </body>
 </html>

@@ -147,68 +147,107 @@ btnEducation.addEventListener('click', () => {
 });
 
 /* =========================================
-   ACHIEVEMENTS (Unified Carousel & Dots Logic)
+   ACHIEVEMENTS (Swiper & Lightbox)
 ========================================= */
-const carouselTrack = document.querySelector('.carousel-track');
-const slider = document.querySelector('.achievements-slider'); 
-const dots = document.querySelectorAll('.dot'); // Declared ONLY ONCE now!
+// 1. Initialize Swiper
+const swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1, // Default (Mobile screens under 768px)
+    spaceBetween: 20,
+    loop: true,
+    speed: 800, 
+    autoplay: {
+        delay: 2500, 
+        disableOnInteraction: false, 
+        pauseOnMouseEnter: true, 
+    },
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    // NEW: Updated Responsive Breakpoints
+    breakpoints: {
+        // When screen is >=430px (Moblie)
+        430: {
+            slidesPerView: 1
+        },
+        // When screen is >= 768px (Tablets)
+        768: {
+            slidesPerView: 2, /* Changed to 2 cards for better spacing */
+            spaceBetween: 25,
+        },
+        // When screen is >= 1024px (Laptops and Desktops)
+        1024: {
+            slidesPerView: 3, /* Shows 3 cards only when there is enough room */
+            spaceBetween: 30,
+        }
+    }
+});
 
-// 1. CSS Animation Click Logic (If using the infinite scrolling track)
-if (carouselTrack && dots.length > 0) {
-    const totalAnimationTime = 25; 
-    const totalUniqueCards = 4;
-    const timePerCard = totalAnimationTime / totalUniqueCards;
+// We must define swiperEl so the click listener knows where to look!
+const swiperEl = document.querySelector(".mySwiper");
 
-    dots.forEach(dot => {
-        dot.addEventListener('click', () => {
-            dots.forEach(d => d.classList.remove('active'));
-            dot.classList.add('active');
+// 2. Lightbox Modal Variables
+const modal = document.getElementById('image-modal');
+const modalImg = document.getElementById('modal-img');
+const closeModalBtn = document.querySelector('.close-modal');
+const prevBtn = document.querySelector('.modal-nav.prev');
+const nextBtn = document.querySelector('.modal-nav.next');
+let currentGallery = [];
+let currentImageIndex = 0;
 
-            const cardIndex = parseInt(dot.getAttribute('data-index'));
+// 3. Event Delegation for Image Clicks (Required because Swiper clones slides)
+if (swiperEl && modal) {
+    swiperEl.addEventListener('click', function(e) {
+        // Check if what was clicked was an image inside our card
+        const img = e.target.closest('.card-img-container img');
+        
+        if (img) {
+            modal.classList.add('show');
+            swiper.autoplay.stop(); // Stop carousel when viewing image
             
-            // Shift the index back by 1 so the targeted card appears in the second slot.
-            // The modulo (%) ensures that if cardIndex is 0, it wraps around to 3 (Card 4).
-            const offsetIndex = (cardIndex - 1 + totalUniqueCards) % totalUniqueCards;
+            // Define galleries based on image clicked
+            if (img.classList.contains('redhat-cert')) {
+                currentGallery = ['img/RedHat Part 1 Cert.png', 'img/RedHat Part 2 Cert.png'];
+            } else {
+                currentGallery = [img.src];
+            }
             
-            const jumpTime = -(offsetIndex * timePerCard);
-
-            carouselTrack.style.animation = 'none';
-            void carouselTrack.offsetWidth; 
+            currentImageIndex = 0;
+            modalImg.src = currentGallery[currentImageIndex];
             
-            carouselTrack.style.animation = `infiniteScroll ${totalAnimationTime}s linear infinite`;
-            carouselTrack.style.animationDelay = `${jumpTime}s`;
-        });
-    });
-}
-
-// 2. Scroll Sync Logic (If using a swipeable/scrollable container)
-if (slider && dots.length > 0) {
-    
-    // Update dots when user scrolls or swipes
-    slider.addEventListener('scroll', () => {
-        const scrollPosition = slider.scrollLeft;
-        const cardWidth = slider.clientWidth;
-        const activeIndex = Math.round(scrollPosition / cardWidth);
-
-        dots.forEach(dot => dot.classList.remove('active'));
-        if (dots[activeIndex]) {
-            dots[activeIndex].classList.add('active');
+            // Show/Hide navigation arrows based on gallery size
+            if (currentGallery.length > 1) {
+                prevBtn.classList.add('show-nav');
+                nextBtn.classList.add('show-nav');
+            } else {
+                prevBtn.classList.remove('show-nav');
+                nextBtn.classList.remove('show-nav');
+            }
         }
     });
 
-    // Allow users to click a dot to jump to a specific card (Scroll method)
-    // NOTE: Only applies if you are NOT using the CSS animation track above
-    if (!carouselTrack) {
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                slider.scrollTo({
-                    left: index * slider.clientWidth,
-                    behavior: 'smooth'
-                });
-            });
-        });
-    }
+    // 4. Slider Arrow Logic
+    window.changeImage = function(direction) {
+        currentImageIndex = (currentImageIndex + direction + currentGallery.length) % currentGallery.length;
+        modalImg.src = currentGallery[currentImageIndex];
+    };
+
+    // 5. Close Modal Logic
+    const closeModal = () => {
+        modal.classList.remove('show');
+        swiper.autoplay.start(); // Resume carousel
+    };
+
+    closeModalBtn.addEventListener('click', closeModal);
+    
+    // Close when clicking outside the image
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
 }
+
 /* =========================================
    ACADEMIC PROJECTS (Accordion Logic)
 ========================================= */
@@ -233,88 +272,6 @@ accordionItems.forEach(item => {
             // scrollHeight dynamically gets the exact pixel height needed for the hidden text
             content.style.maxHeight = content.scrollHeight + "px";
         }
-    });
-});
-
-/* =========================================
-   IMAGE LIGHTBOX & ANIMATION PAUSE
-========================================= */
-const modal = document.getElementById('image-modal');
-const modalImg = document.getElementById('modal-img');
-const closeModalBtn = document.querySelector('.close-modal');
-// Targets all images inside your scrolling track
-const cardImages = document.querySelectorAll('.carousel-track img'); 
-
-if (modal && cardImages.length > 0) {
-    // 1. Open Modal and Pause Animation
-    cardImages.forEach(img => {
-        img.addEventListener('click', function() {
-            modal.classList.add('show');
-            modalImg.src = this.src; // Copies the clicked image's source to the modal
-            
-            // Pauses the looping track
-            if (carouselTrack) {
-                carouselTrack.classList.add('pause-animation');
-            }
-        });
-    });
-
-    // 2. Helper function to close modal and resume animation
-    const closeModal = () => {
-        modal.classList.remove('show');
-        
-        // Resumes the looping track
-        if (carouselTrack) {
-            carouselTrack.classList.remove('pause-animation');
-        }
-    };
-
-    // 3. Close when clicking the 'X'
-    closeModalBtn.addEventListener('click', closeModal);
-
-    // 4. Close when clicking anywhere on the dark background outside the image
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeModal();
-        }
-    });
-}
-
-/* =========================================
-   MODAL IMAGE SLIDER LOGIC
-========================================= */
-const prevBtn = document.querySelector('.modal-nav.prev');
-const nextBtn = document.querySelector('.modal-nav.next');
-
-function changeImage(direction) {
-    currentImageIndex = (currentImageIndex + direction + currentGallery.length) % currentGallery.length;
-    modalImg.src = currentGallery[currentImageIndex];
-}
-
-cardImages.forEach(img => {
-    img.addEventListener('click', function() {
-        modal.classList.add('show');
-        
-        // Define galleries
-        if (this.classList.contains('redhat-cert')) {
-            currentGallery = ['img/RedHat Part 1 Cert.png', 'img/RedHat Part 2 Cert.png'];
-        } else {
-            currentGallery = [this.src];
-        }
-        
-        currentImageIndex = 0;
-        modalImg.src = currentGallery[currentImageIndex];
-        
-        // Show/Hide navigation buttons based on gallery size
-        if (currentGallery.length > 1) {
-            prevBtn.classList.add('show-nav');
-            nextBtn.classList.add('show-nav');
-        } else {
-            prevBtn.classList.remove('show-nav');
-            nextBtn.classList.remove('show-nav');
-        }
-        
-        if (carouselTrack) carouselTrack.classList.add('pause-animation');
     });
 });
 
