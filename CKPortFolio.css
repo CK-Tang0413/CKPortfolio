@@ -1934,6 +1934,7 @@ body.light-mode .footer-signature {
         object-fit: contain; 
         z-index: 2;
         transform: scale(1.1);
+        mix-blend-mode: multiply;
     }
     
     /* We also need to enlarge the glow effect so it matches the new image size */
