@@ -835,23 +835,24 @@ body.light-mode .swiper-pagination-bullet-active {
 /* Smooth continuous scrolling */
 .swiper-wrapper {
     transition-timing-function: linear !important; 
+    align-items: stretch;
 }
 
 /* Ensure slides allow cards to fill height */
 .swiper-slide {
     display: flex;
     justify-content: center;
-    height: auto; 
+    height: auto !important; 
 }
 
 /* --- Card Styling --- */
 .achieve-card {
     width: 100%;
     max-width: 380px;
-    height: 450px; /* Fixed height so all cards match perfectly */
+    height: 100% !important; /* Fixed height so all cards match perfectly */
     background: linear-gradient(180deg, var(--card-bg) 60%, rgba(139, 92, 246, 0.3) 100%);
     border-radius: 20px;
-    padding: 25px 20px;
+    padding: 25px 20px 20px;
     display: flex;
     flex-direction: column;
     color: var(--text-color);
@@ -902,6 +903,7 @@ body.light-mode .swiper-pagination-bullet-active {
     position: relative;
     border-radius: 12px;
     overflow: hidden;
+    width: 100%;
     height: 170px;
     box-shadow: 0 12px 25px rgba(139, 92, 246, 0.4);
     background-color: #000;
@@ -910,7 +912,8 @@ body.light-mode .swiper-pagination-bullet-active {
 .card-img-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    border-radius: 8px;
     transition: transform 0.5s ease;
     opacity: 0.9;
     cursor: pointer;
@@ -946,6 +949,21 @@ body.light-mode .swiper-pagination-bullet-active {
 .card-img-container:hover .hover-icon {
     opacity: 1;
     transform: scale(1) translate(0, 0); 
+}
+
+/* Issuer Text Styling */
+.issuer-text {
+    font-size: 0.9rem;          /* Makes it slightly smaller than the main description */
+    color: #94a3b8;             /* A sleek, subtle slate gray (adjust to match your theme) */
+    display: flex;
+    align-items: center;
+    gap: 6px;                   /* Adds perfect spacing between the Boxicon and the text */
+    margin-bottom: 4px;         /* Keeps it tight with the date text below it */
+}
+
+.issuer-text i {
+    color: #3b82f6;             /* Adds a pop of your signature blue to the institution icon */
+    font-size: 1.1rem;
 }
 
 /* =========================================
