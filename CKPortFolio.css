@@ -57,12 +57,9 @@ nav {
     width: 100%;
     z-index: 1000;
     
-    /* Glass Effect Properties */
-    background: rgba(15, 23, 42, 0.7); /* Dark semi-transparent background */
-    backdrop-filter: blur(12px);       /* The core blur effect */
-    -webkit-backdrop-filter: blur(12px); /* Safari support */
-    
-    /* Keep your existing padding/flex rules here */
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 1rem 5%;
     display: flex;
     justify-content: space-between;
@@ -71,9 +68,8 @@ nav {
     transition: background 0.3s ease;
 }
 
-/* Light Mode Glass Effect */
 body.light-mode nav {
-    background: rgba(255, 255, 255, 0.7); /* Light semi-transparent background */
+    background: rgba(255, 255, 255, 0.7); 
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -105,17 +101,15 @@ body.light-mode nav {
 /* =========================================
    DESKTOP DEFAULT overrides
 ========================================= */
-/* Hide menu icon on desktop */
 .menu-icon {
     display: none;
     font-size: 2.2rem;
     cursor: pointer;
     color: var(--text-color);
-    z-index: 1001; /* Keeps it above the sidebar */
+    z-index: 1001;
     transition: transform 0.3s ease;
 }
 
-/* Optional: Slight rotation when clicking */
 .menu-icon:active i {
     transform: scale(0.9);
 }
@@ -124,12 +118,10 @@ body.light-mode nav {
    NAVIGATION LOGO STYLING
 ========================================= */
 .logo {
-    font-size: 1.8rem; /* Increased size for impact */
-    font-weight: 800;  /* Bold weight */
+    font-size: 1.8rem;
+    font-weight: 800;
     letter-spacing: 1px;
-    
-    /* Apply the Gradient */
-    background: linear-gradient(90deg, #3b82f6, #f97316); /* Dark Mode Gradient */
+    background: linear-gradient(90deg, #3b82f6, #f97316);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -138,7 +130,6 @@ body.light-mode nav {
     transition: transform 0.3s ease;
 }
 
-/* Light Mode Logo Gradient (Purple to Coral) */
 body.light-mode .logo {
     background: linear-gradient(90deg, #7e22ce, #f43f5e);
     -webkit-background-clip: text;
@@ -147,7 +138,6 @@ body.light-mode .logo {
     color: transparent;
 }
 
-/* Added hover effect for extra polish */
 .logo:hover {
     transform: scale(1.05);
     cursor: pointer;
@@ -176,35 +166,30 @@ body.light-mode .logo {
 }
 
 body.light-mode .theme-switch {
-    background: rgba(0, 0, 0, 0.05); /* Lighter track for light mode */
+    background: rgba(0, 0, 0, 0.05);
     border-color: rgba(0, 0, 0, 0.1);
 }
 
-/* The Sliding Ball */
 .switch-ball {
     width: 26px;
     height: 26px;
-    background: var(--primary-color); /* Blue for Dark Mode */
+    background: var(--primary-color);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
     left: 3px; 
-    /* Default Dark Mode: Ball is on the right side */
     transform: translateX(30px); 
-    /* Cubic-bezier adds a slight "bounce" to the slide */
     transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), background 0.4s ease;
-    overflow: hidden; /* Hides the inactive icon */
+    overflow: hidden;
 }
 
-/* Light Mode: Ball slides to the left and changes color */
 body.light-mode .switch-ball {
     transform: translateX(0px); 
-    background: #f59e0b; /* Warm yellow/orange for the Sun */
+    background: #f59e0b;
 }
 
-/* Base Icon Styling */
 .switch-ball i {
     position: absolute;
     font-size: 1.15rem;
@@ -212,42 +197,37 @@ body.light-mode .switch-ball {
     transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
-/* --- Dark Mode (Default) Animations --- */
 .moon-icon {
     opacity: 1;
-    transform: translateY(0) rotate(0deg); /* Moon is visible */
+    transform: translateY(0) rotate(0deg); 
 }
 
 .sun-icon {
     opacity: 0;
-    transform: translateY(20px) rotate(45deg); /* Sun is pushed down and rotated out */
+    transform: translateY(20px) rotate(45deg); 
 }
 
-/* --- Light Mode Animations --- */
 body.light-mode .moon-icon {
     opacity: 0;
-    transform: translateY(-20px) rotate(-45deg); /* Moon pushes up and rotates away */
+    transform: translateY(-20px) rotate(-45deg);
 }
 
 body.light-mode .sun-icon {
     opacity: 1;
-    transform: translateY(0) rotate(0deg); /* Sun slides up into view */
+    transform: translateY(0) rotate(0deg);
 }
 
 /* =========================================
    LIGHT MODE TEXT READABILITY FIXES
 ========================================= */
-
-/* Targets the descriptions in About, Timeline, and Projects */
 body.light-mode .about-desc,
 body.light-mode .timeline-right p,
 body.light-mode .accordion-content p {
-    color: #334155; /* A deep slate-gray that provides excellent contrast */
-    font-weight: 500; /* Slightly increases thickness for better readability on bright backgrounds */
-    line-height: 1.7; /* Ensures the text breathes nicely */
+    color: #334155; 
+    font-weight: 500;
+    line-height: 1.7;
 }
 
-/* Fixes the subtitle on the Skills section if it is also washing out */
 body.light-mode .skills-subtitle,
 body.light-mode .card-details p {
     color: #475569; 
@@ -256,8 +236,6 @@ body.light-mode .card-details p {
 /* =========================================
    LIGHT MODE VIBRANT COLORS
 ========================================= */
-
-/* The new Light Mode Gradient: Deep Purple to Vibrant Coral */
 body.light-mode .highlight-gradient {
     background: linear-gradient(90deg, #7e22ce, #f43f5e); 
     -webkit-background-clip: text;
@@ -266,41 +244,35 @@ body.light-mode .highlight-gradient {
     color: transparent;
 }
 
-/* Updates the solid bolded text (like your CGPA) to match the Deep Purple */
 body.light-mode .highlight-text {
     color: #7e22ce; 
 }
 
-/* Gives the "Resume" button a transparent background with a purple outline in light mode */
 body.light-mode .btn-glow {
     background: transparent;
-    border: 2px solid #7e22ce; /* Deep purple outline */
-    color: #7e22ce; /* Deep purple text and icon */
-    box-shadow: none; /* Keeps it clean without a glow when not hovered */
+    border: 2px solid #7e22ce;
+    color: #7e22ce;
+    box-shadow: none;
 }
 
-/* Fills the button with purple and adds the glow when hovered */
 body.light-mode .btn-glow:hover {
-    background: #7e22ce; /* Solid purple background */
-    color: #ffffff; /* White text for contrast */
-    box-shadow: 0 0 15px rgba(126, 34, 206, 0.4); /* Brings back the purple glow */
+    background: #7e22ce;
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(126, 34, 206, 0.4);
 }
 
 /* =========================================
    LIGHT MODE HOVER GRADIENTS
 ========================================= */
-
-/* 1. Social Icons Hover Gradient */
 body.light-mode .social-icons a:hover {
     background: linear-gradient(90deg, #7e22ce, #f43f5e);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
-    transform: scale(1.15); /* Keeps the pop-out animation */
+    transform: scale(1.15);
 }
 
-/* 2. Contact Card Icon Hover Gradient */
 body.light-mode .contact-card:hover .contact-icon {
     background: linear-gradient(90deg, #7e22ce, #f43f5e);
     -webkit-background-clip: text;
@@ -310,30 +282,24 @@ body.light-mode .contact-card:hover .contact-icon {
     transform: scale(1.1);
 }
 
-/* 3. Contact Card Circular Arrow Hover */
 body.light-mode .contact-card:hover .contact-arrow {
     background: linear-gradient(90deg, #7e22ce, #f43f5e);
-    color: #fff; /* Keeps the arrow itself pure white against the colorful background */
-    /* Note: The rotation animation is still handled by your base CSS! */
+    color: #fff; 
 }
 
-/* 4. Contact Form Submit Button Hover */
 body.light-mode .submit-btn:hover {
     background: linear-gradient(90deg, #7e22ce, #f43f5e);
-    box-shadow: 0 0 15px rgba(244, 63, 94, 0.4); /* Adds a soft coral glow */
+    box-shadow: 0 0 15px rgba(244, 63, 94, 0.4);
     border-color: transparent;
 }
 
 /* =========================================
    LIGHT MODE CAROUSEL DOTS
 ========================================= */
-
-/* Darken inactive dots slightly for better contrast on white */
 body.light-mode .dot {
     background: #cbd5e1; 
 }
 
-/* Make the active dot deep purple with a matching glow */
 body.light-mode .dot.active {
     background: #7e22ce; 
     box-shadow: 0 0 12px rgba(126, 34, 206, 0.6);
@@ -389,14 +355,14 @@ body.light-mode .dot.active {
 
 .social-icons {
     display: flex;
-    flex-direction: row; /* Changed from column to row for side-by-side layout */
-    gap: 20px; /* Slightly increased the gap to balance the larger icons */
+    flex-direction: row;
+    gap: 20px; 
 }
 
 .social-icons a {
     color: var(--text-color);
     text-decoration: none;
-    font-size: 2rem; /* Increased from 2rem to make them stand out more */
+    font-size: 2rem; 
     transition: color 0.3s ease, transform 0.3s ease;
     display: inline-block;
 }
@@ -419,22 +385,20 @@ body.light-mode .dot.active {
     font-weight: 800;
 }
 
-/* --- Name Floating Animation --- */
 .left-column .title {
-    display: inline-block; /* Required for the transform to work smoothly on text */
-    animation: floatMotion 4s ease-in-out infinite; /* 4 second continuous loop */
+    display: inline-block; 
+    animation: floatMotion 4s ease-in-out infinite; 
 }
 
-/* The continuous up and down motion */
 @keyframes floatMotion {
     0% {
         transform: translateY(0px);
     }
     50% {
-        transform: translateY(-15px); /* Floats up by 15 pixels */
+        transform: translateY(-15px);
     }
     100% {
-        transform: translateY(0px); /* Returns to starting position */
+        transform: translateY(0px);
     }
 }
 
@@ -493,7 +457,6 @@ body.light-mode .dot.active {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
 }
-
 
 /* =========================================
    ABOUT ME SECTION
@@ -608,7 +571,6 @@ body.light-mode .dot.active {
     transform: translate(0, 0); 
 }
 
-
 /* =========================================
    EXPERIENCE & EDUCATION SECTION
 ========================================= */
@@ -649,8 +611,8 @@ body.light-mode .dot.active {
 
 .toggle-btn i {
     font-size: 1.2rem;
-    vertical-align: middle; /* Keeps the icon perfectly centered with the text */
-    margin-left: 5px; /* Adds a small breathing space between the word and the icon */
+    vertical-align: middle;
+    margin-left: 5px; 
 }
 
 .toggle-btn.active {
@@ -740,10 +702,9 @@ body.light-mode .dot.active {
 /* =========================================
    TIMELINE HOVER LINKS (Work & Education)
 ========================================= */
-/* Dark Mode Default - Initially Blue */
 .timeline-link {
     text-decoration: none;
-    color: #3b82f6; /* Changed from 'inherit' to make it stand out instantly */
+    color: #3b82f6;
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -751,7 +712,6 @@ body.light-mode .dot.active {
     cursor: pointer;
 }
 
-/* The external link icon - hidden by default */
 .timeline-link i {
     font-size: 1.2rem;
     opacity: 0;
@@ -760,9 +720,8 @@ body.light-mode .dot.active {
     color: #3b82f6; 
 }
 
-/* Hover State - Adds underline and slides icon */
 .timeline-link:hover {
-    text-decoration: underline; /* Extra visual feedback when hovered */
+    text-decoration: underline;
 }
 
 .timeline-link:hover i {
@@ -770,8 +729,6 @@ body.light-mode .dot.active {
     transform: translateX(0);
 }
 
-/* --- Light Mode Overrides --- */
-/* Light Mode Default - Initially Purple */
 body.light-mode .timeline-link,
 body.light-mode .timeline-link i {
     color: #7e22ce; 
@@ -788,68 +745,59 @@ body.light-mode .timeline-link i {
     overflow: hidden;
 }
 
-/* Swiper Container */
 .swiper {
     width: 100%;
     max-width: 1200px;
-    padding: 30px 0 10px 0; /* Reset bottom padding since we use margin on the dots now */
+    padding: 30px 0 10px 0;
 }
 
-/* --- Swiper Pagination Dots --- */
 .swiper-pagination {
     position: relative !important; 
     bottom: auto !important;       
     margin-top: 20px !important;   
 }
 
-/* Inactive Dots */
 .swiper-pagination-bullet {
-    width: 16px !important;  /* Added !important */
-    height: 16px !important; /* Added !important */
-    background: rgba(255, 255, 255, 0.2) !important; /* Added !important */
-    opacity: 1 !important; /* Forces opacity to 100% so your custom color shows clearly */
+    width: 16px !important;  
+    height: 16px !important; 
+    background: rgba(255, 255, 255, 0.2) !important; 
+    opacity: 1 !important; 
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     margin: 0 8px !important; 
 }
 
-/* Active Dot */
 .swiper-pagination-bullet-active {
-    width: 20px !important; /* Added !important to force the pill shape */
+    width: 20px !important; 
     height: 20px !important;
-    border-radius: 10px !important; /* Added !important to override default 50% circle */
+    border-radius: 10px !important; 
     background: var(--primary-color) !important; 
     box-shadow: 0 0 12px rgba(59, 130, 246, 0.6) !important;
 }
 
-/* Light Mode Inactive Dots */
 body.light-mode .swiper-pagination-bullet {
-    background: #f3e3ff !important; /* Added !important */
+    background: #f3e3ff !important; 
 }
 
-/* Light Mode Active Dot */
 body.light-mode .swiper-pagination-bullet-active {
     background: var(--primary-color) !important; 
     box-shadow: 0 0 12px rgba(126, 34, 206, 0.6) !important;
 }
 
-/* Smooth continuous scrolling */
 .swiper-wrapper {
     transition-timing-function: linear !important; 
     align-items: stretch;
 }
 
-/* Ensure slides allow cards to fill height */
 .swiper-slide {
     display: flex;
     justify-content: center;
     height: auto !important; 
 }
 
-/* --- Card Styling --- */
 .achieve-card {
     width: 100%;
     max-width: 380px;
-    height: 100% !important; /* Fixed height so all cards match perfectly */
+    height: 100% !important;
     background: linear-gradient(180deg, var(--card-bg) 60%, rgba(139, 92, 246, 0.3) 100%);
     border-radius: 20px;
     padding: 25px 20px 20px;
@@ -897,7 +845,6 @@ body.light-mode .swiper-pagination-bullet-active {
     margin-bottom: 5px;
 }
 
-/* --- Image Container & Hover --- */
 .card-img-container {
     margin-top: auto; 
     position: relative;
@@ -938,7 +885,7 @@ body.light-mode .swiper-pagination-bullet-active {
     opacity: 0;
     transform: scale(0.5) translate(-10px, 10px);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    pointer-events: none; /* Allows clicks to pass through to the image */
+    pointer-events: none; 
 }
 
 .card-img-container:hover img {
@@ -951,18 +898,17 @@ body.light-mode .swiper-pagination-bullet-active {
     transform: scale(1) translate(0, 0); 
 }
 
-/* Issuer Text Styling */
 .issuer-text {
-    font-size: 0.9rem;          /* Makes it slightly smaller than the main description */
-    color: #94a3b8;             /* A sleek, subtle slate gray (adjust to match your theme) */
+    font-size: 0.9rem; 
+    color: #94a3b8;    
     display: flex;
     align-items: center;
-    gap: 6px;                   /* Adds perfect spacing between the Boxicon and the text */
-    margin-bottom: 4px;         /* Keeps it tight with the date text below it */
+    gap: 6px;
+    margin-bottom: 4px; 
 }
 
 .issuer-text i {
-    color: #3b82f6;             /* Adds a pop of your signature blue to the institution icon */
+    color: #3b82f6;
     font-size: 1.1rem;
 }
 
@@ -978,15 +924,14 @@ body.light-mode .swiper-pagination-bullet-active {
 
 .accordion-container {
     width: 100%;
-    max-width: 900px; /* Keeps the list centered and readable */
+    max-width: 900px;
     margin-top: 30px;
 }
 
 .accordion-item {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle divider */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Light mode specific border adjustments */
 body.light-mode .accordion-item {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -1000,7 +945,6 @@ body.light-mode .accordion-item {
     transition: color 0.3s ease;
 }
 
-/* Hover effect for the entire row */
 .accordion-header:hover .project-title,
 .accordion-header:hover .project-icon {
     color: var(--primary-color);
@@ -1014,7 +958,7 @@ body.light-mode .accordion-item {
 
 .project-icon {
     font-size: 1.8rem;
-    color: var(--primary-color); /* Colored icon like the design */
+    color: var(--primary-color); 
     transition: transform 0.3s ease;
 }
 
@@ -1029,7 +973,6 @@ body.light-mode .accordion-item {
     transition: color 0.3s ease;
 }
 
-/* The toggle chevron circle styling */
 .toggle-icon-bg {
     width: 35px;
     height: 35px;
@@ -1042,23 +985,20 @@ body.light-mode .accordion-item {
 }
 
 .accordion-header:hover .toggle-icon-bg {
-    background: rgba(59, 130, 246, 0.15); /* Subtle blue background on hover */
+    background: rgba(59, 130, 246, 0.15);
 }
 
 .toggle-icon {
     font-size: 1.5rem;
     color: var(--text-color);
-    transition: transform 0.4s ease; /* Smooth rotation */
+    transition: transform 0.4s ease;
 }
 
-/* Rotates the arrow when the accordion is active */
 .accordion-item.active .toggle-icon {
     transform: rotate(-180deg); 
 }
 
-/* Hidden Content Area Styling */
 .accordion-content {
-    /* Critical for smooth slide-down animation */
     max-height: 0;
     opacity: 0;
     overflow: hidden;
@@ -1067,12 +1007,11 @@ body.light-mode .accordion-item {
 
 .accordion-item.active .accordion-content {
     opacity: 1;
-    /* max-height is injected via JS to ensure it animates correctly */
 }
 
 .content-inner {
     padding-bottom: 40px;
-    padding-left: 60px; /* Aligns description text with the title, skipping the icon */
+    padding-left: 60px;
 }
 
 .content-inner p {
@@ -1087,7 +1026,6 @@ body.light-mode .content-inner p {
     color: #4b5563;
 }
 
-/* --- Project Actions & Buttons --- */
 .project-actions {
     margin: 20px 0;
 }
@@ -1096,29 +1034,25 @@ body.light-mode .content-inner p {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    /* Your signature Purple to Blue gradient */
     background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
-    color: #ffffff !important; /* Forces white text for perfect contrast */
+    color: #ffffff !important; 
     padding: 10px 18px;
     border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.95rem;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3); /* Subtle purple glow */
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
 }
 
 .github-btn:hover {
     transform: translateY(-2px);
-    /* Slightly deeper gradient on hover */
     background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%); 
-    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5); /* Stronger glow on hover */
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
     color: #ffffff !important;
 }
 
-/* --- Light Mode Enhancements --- */
 body.light-mode .github-btn {
-    /* Slightly stronger shadow so the button pops off the light background */
     box-shadow: 0 6px 15px rgba(139, 92, 246, 0.4); 
 }
 
@@ -1126,10 +1060,9 @@ body.light-mode .github-btn:hover {
     box-shadow: 0 8px 22px rgba(139, 92, 246, 0.6);
 }
 
-/* --- Responsive YouTube Embed --- */
 .video-container {
     position: relative;
-    padding-bottom: 56.25%; /* Forces a perfect 16:9 aspect ratio */
+    padding-bottom: 56.25%; 
     height: 0;
     overflow: hidden;
     border-radius: 10px;
@@ -1162,8 +1095,8 @@ body.light-mode .github-btn:hover {
     align-items: center;
     gap: 6px;
     padding: 6px 12px;
-    background: rgba(255, 255, 255, 0.05); /* Subtle transparent white */
-    color: #e2e8f0; /* Light gray text for dark mode */
+    background: rgba(255, 255, 255, 0.05);
+    color: #e2e8f0;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     font-size: 0.85rem;
@@ -1181,7 +1114,7 @@ body.light-mode .github-btn:hover {
     transform: translateY(-2px);
 }
 .tech-badge:hover i {
-    transform: scale(1.2); /* Makes the colored icon pop a bit on hover */
+    transform: scale(1.2);
 }
 
 /* --- Official Brand Colors for Icons --- */
@@ -1195,17 +1128,15 @@ body.light-mode .github-btn:hover {
 .tech-badge .bx-bot { color: #3b82f6; }           /* Botpress (Theme Blue) */
 .tech-badge .bx-layer { color: #ff5722; }         /* Joget DX Orange */
 
-/* --- Light Mode Overrides --- */
 body.light-mode .tech-badge {
-    background: rgba(0, 0, 0, 0.03); /* Subtle dark background */
-    color: #334155; /* Dark gray text */
+    background: rgba(0, 0, 0, 0.03);
+    color: #334155;
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 body.light-mode .tech-badge:hover {
     background: rgba(0, 0, 0, 0.08);
 }
-
 
 /* =========================================
    SKILLS SECTION
@@ -1238,7 +1169,6 @@ body.light-mode .skills-subtitle {
     gap: 30px;
 }
 
-/* Wide Card Styling */
 .skill-card {
     background: var(--card-bg);
     border-radius: 25px;
@@ -1248,7 +1178,6 @@ body.light-mode .skills-subtitle {
     justify-content: space-between;
     position: relative;
     overflow: hidden;
-    /* Subtle border to separate it from the background */
     border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -1264,7 +1193,6 @@ body.light-mode .skill-card {
     box-shadow: 0 15px 40px rgba(59, 130, 246, 0.15);
 }
 
-/* Subtle glowing orb in the background of each card */
 .skill-card::before {
     content: '';
     position: absolute;
@@ -1275,16 +1203,15 @@ body.light-mode .skill-card {
     height: 400px;
     background: radial-gradient(circle, var(--primary-color) 0%, transparent 60%);
     opacity: 0.08; 
-    pointer-events: none; /* Prevents the glow from blocking clicks/hovers */
+    pointer-events: none;
 }
 
-/* Left Side: Category Title & Large Icon */
 .skill-left {
     display: flex;
     align-items: center;
     gap: 20px;
     width: 35%;
-    z-index: 1; /* Keeps text above the glow */
+    z-index: 1;
 }
 
 .skill-icon {
@@ -1298,7 +1225,6 @@ body.light-mode .skill-card {
     font-weight: 700;
 }
 
-/* Right Side: Skill Items Grid */
 .skill-right {
     width: 60%;
     display: flex;
@@ -1324,22 +1250,18 @@ body.light-mode .skill-item {
 
 .skill-item:hover {
     color: var(--primary-color);
-    transform: scale(1.05); /* Slight pop when hovered */
+    transform: scale(1.05);
 }
 
-/* Change this from .skill-item span to .skill-item i */
 .skill-item i {
-    font-size: 1.4rem; /* Increased slightly so the icons match the text height perfectly */
+    font-size: 1.4rem; 
     transition: transform 0.3s ease;
 }
 
-/* Optional: adds a tiny bounce to just the icon when hovering over the skill */
 .skill-item:hover i {
     transform: translateY(-2px);
 }
 
-/* --- Staggered Animation Delays --- */
-/* These classes hook into the .scroll-fade-up logic you already built */
 .delay-1 { transition-delay: 0.1s !important; }
 .delay-2 { transition-delay: 0.25s !important; }
 .delay-3 { transition-delay: 0.4s !important; }
@@ -1350,7 +1272,6 @@ body.light-mode .skill-item {
 /* =========================================
    SKILLS SECTION ICON COLORS
 ========================================= */
-/* Add a smooth hover pop effect to all skill icons */
 .skill-item i {
     transition: transform 0.3s ease;
 }
@@ -1405,7 +1326,6 @@ body.light-mode .skill-item {
     margin-top: 20px;
 }
 
-/* --- Left Side: Form Elements --- */
 .contact-form {
     flex: 1;
     display: flex;
@@ -1413,7 +1333,6 @@ body.light-mode .skill-item {
     gap: 20px;
 }
 
-/* NEW: Groups inputs side-by-side */
 .input-row {
     display: flex;
     gap: 20px;
@@ -1437,7 +1356,7 @@ body.light-mode .contact-input {
 }
 
 .contact-input.textarea {
-    border-radius: 20px; /* Slightly less rounded for text areas */
+    border-radius: 20px;
     resize: vertical;
 }
 
@@ -1450,18 +1369,15 @@ body.light-mode .contact-input {
    CONTACT FORM PLACEHOLDER COLOR
 ========================================= */
 
-/* Dark Mode: Brighter placeholder text for better readability */
 .contact-input::placeholder {
     color: #94a3b8; 
-    opacity: 1; /* Ensures browsers don't lower the opacity by default */
+    opacity: 1; 
 }
 
-/* Light Mode: Darker placeholder text for better readability on white */
 body.light-mode .contact-input::placeholder {
     color: #64748b; 
 }
 
-/* Submit Button */
 .submit-btn {
     background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
     color: #fff;
@@ -1484,7 +1400,6 @@ body.light-mode .contact-input::placeholder {
     box-shadow: 0 15px 25px rgba(59, 130, 246, 0.5);
 }
 
-/* --- Right Side: Contact Info Cards --- */
 .contact-info-wrapper {
     flex: 1;
     display: flex;
@@ -1509,7 +1424,7 @@ body.light-mode .contact-card {
 }
 
 .contact-card:hover {
-    transform: translateX(10px); /* Slides right on hover */
+    transform: translateX(10px);
     border-color: var(--primary-color);
     box-shadow: 0 10px 20px rgba(59, 130, 246, 0.15);
 }
@@ -1526,10 +1441,8 @@ body.light-mode .contact-card {
     transition: transform 0.3s ease;
 }
 
-/* Optional: Slight pop when hovering over the card & gradient color */
 .contact-card:hover .contact-icon {
     transform: scale(1.1);
-    /* Apply gradient to the icon text */
     background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1559,16 +1472,15 @@ body.light-mode .contact-label {
     font-weight: 500;
 }
 
-/* Base arrow container: Equal width/height + 50% border-radius creates the circle */
 .contact-arrow {
-    width: 45px;  /* Fixed equal width... */
-    height: 45px; /* ...and height */
-    border-radius: 50%; /* Makes it a perfect circle */
-    background: rgba(255, 255, 255, 0.05); /* Subtle background when not hovered */
+    width: 45px;  
+    height: 45px; 
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
     color: var(--text-color);
     display: flex;
-    justify-content: center; /* Centers the icon horizontally */
-    align-items: center;     /* Centers the icon vertically */
+    justify-content: center;
+    align-items: center; 
     transition: all 0.3s ease;
 }
 
@@ -1576,47 +1488,39 @@ body.light-mode .contact-arrow {
     background: rgba(0, 0, 0, 0.05);
 }
 
-/* Make sure the Boxicon inside is sized nicely */
 .contact-arrow i {
     font-size: 1.5rem;
 }
 
-/* The hover state (background changes, stays a circle, and rotates) */
 .contact-card:hover .contact-arrow {
-    /* Apply gradient to the circle background */
     background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
     color: #fff;
     transform: rotate(-45deg); 
 }
 
-
-
 /* =========================================
    IMAGE LIGHTBOX MODAL
 ========================================= */
-/* The hidden modal background */
 .modal {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed; 
-    z-index: 9999; /* Ensures it sits on top of absolutely everything, including the navbar */
+    z-index: 9999;
     left: 0;
     top: 0;
     width: 100%; 
     height: 100%; 
-    background-color: rgba(0, 0, 0, 0.85); /* Dark overlay */
+    background-color: rgba(0, 0, 0, 0.85);
     justify-content: center;
     align-items: center;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-/* Class added via JS to fade it in */
 .modal.show {
     display: flex;
     opacity: 1;
 }
 
-/* The actual popped-up image */
 .modal-content {
     max-width: 90%;
     max-height: 90vh;
@@ -1626,12 +1530,10 @@ body.light-mode .contact-arrow {
     transition: transform 0.3s ease;
 }
 
-/* Slight zoom-in effect when opened */
 .modal.show .modal-content {
     transform: scale(1);
 }
 
-/* The Close Button */
 .close-modal {
     position: absolute;
     top: 20px;
@@ -1646,19 +1548,17 @@ body.light-mode .contact-arrow {
     color: var(--primary-color);
 }
 
-/* Utility class to pause the carousel */
 .pause-animation {
     animation-play-state: paused !important;
 }
 
-/* Make sure the images on the cards look clickable */
 .carousel-track img {
     cursor: pointer;
     transition: transform 0.3s ease;
 }
 
 .carousel-track img:hover {
-    transform: scale(1.03); /* Slight zoom on hover to indicate it can be clicked */
+    transform: scale(1.03); 
 }
 
 .modal-content-wrapper {
@@ -1668,13 +1568,12 @@ body.light-mode .contact-arrow {
     height: 100%;
 }
 
-/* Hide arrows by default */
 .modal-nav {
-    display: none; /* Changed from absolute/visible to none */
+    display: none; 
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.3); /* Added slight background for better touch */
+    background: rgba(0, 0, 0, 0.3);
     border: none;
     color: white;
     font-size: 3rem;
@@ -1684,7 +1583,6 @@ body.light-mode .contact-arrow {
     border-radius: 50%;
 }
 
-/* This class will be added by JS to show the arrows */
 .modal-nav.show-nav {
     display: block;
 }
@@ -1702,18 +1600,11 @@ body.light-mode .contact-arrow {
     width: 50px;
     height: 50px;
     border-radius: 12px;
-    
-    /* 1. Set a transparent border to make room for the gradient */
     border: 2px solid transparent; 
-    
-    /* 2. The Background Trick: Dark Glass center + Blue/Orange Gradient Border */
     background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)) padding-box,
                 linear-gradient(90deg, #3b82f6, #f97316) border-box;
-                
-    /* Glass Effect Blur */
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    
     color: #fff;
     display: flex;
     justify-content: center;
@@ -1722,20 +1613,16 @@ body.light-mode .contact-arrow {
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease, bottom 0.2s ease; /* Added bottom transition */
-    z-index: 800; /* Lowered slightly below modal/nav */
+    transition: all 0.3s ease, bottom 0.2s ease;
+    z-index: 800;
 }
 
-/* --- Light Mode Variations --- */
 body.light-mode .back-to-top {
-    /* Light Glass center + Purple/Coral Gradient Border */
     background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)) padding-box,
                 linear-gradient(90deg, #7e22ce, #f43f5e) border-box;
-    color: #7e22ce; /* Purple icon */
+    color: #7e22ce;
 }
 
-/* --- Hover Effects --- */
-/* Fills the entire button with the solid gradient and bounces up */
 .back-to-top:hover {
     background: linear-gradient(90deg, #3b82f6, #f97316) border-box; 
     color: #fff;
@@ -1749,7 +1636,6 @@ body.light-mode .back-to-top:hover {
     box-shadow: 0 8px 20px rgba(126, 34, 206, 0.4);
 }
 
-/* Show when in-view class is toggled by JS */
 .back-to-top.show {
     opacity: 1;
     visibility: visible;
@@ -1761,7 +1647,7 @@ body.light-mode .back-to-top:hover {
 footer {
     padding: 2rem 5%;
     text-align: center;
-    background: rgba(15, 23, 42, 0.5); /* Semi-transparent */
+    background: rgba(15, 23, 42, 0.5);
     backdrop-filter: blur(8px);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: #94a3b8;
@@ -1797,7 +1683,6 @@ body.light-mode .footer-content p {
     margin: 0;
 }
 
-/* Optional: Make the signature appear as a gradient for a premium touch */
 .footer-signature {
     background: linear-gradient(90deg, #3b82f6, #f97316);
     -webkit-background-clip: text;
@@ -1807,7 +1692,6 @@ body.light-mode .footer-content p {
     font-weight: 600;
 }
 
-/* Match Light Mode */
 body.light-mode .footer-signature {
     background: linear-gradient(90deg, #7e22ce, #f43f5e);
     -webkit-background-clip: text;
@@ -1823,7 +1707,6 @@ body.light-mode .footer-signature {
     /* =========================================
     RESPONSIVE: Navbar (Max 768px)
     ========================================= */
-    /* Rearrange the Nav bar using Flexbox */
     nav {
         display: flex;
         justify-content: space-between;
@@ -1831,17 +1714,17 @@ body.light-mode .footer-signature {
     }
 
     .logo {
-        order: 1; /* Keep logo on the left */
+        order: 1;
     }
 
     #theme-toggle {
-        order: 2; /* Put theme toggle next to hamburger */
-        margin-left: auto; /* Pushes toggle and menu to the right */
+        order: 2;
+        margin-left: auto;
         margin-right: 15px; 
     }
 
     .menu-icon {
-        display: block; /* Show hamburger */
+        display: block;
         order: 3; 
         position: relative;
     }
@@ -1852,36 +1735,28 @@ body.light-mode .footer-signature {
     .nav-links {
         position: fixed;
         top: 0;
-        right: -100%; /* Hidden completely to the right by default */
+        right: -100%;
         width: 75%;
         max-width: 320px;
         height: 100vh;
-        
-        /* Glassmorphism Effect */
         background: rgba(15, 23, 42, 0.7); 
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         border-left: 1px solid rgba(255, 255, 255, 0.1);
-        
-        /* Layout matching the reference image */
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
         padding-left: 10%;
-        
-        /* Smooth slide-in animation */
         transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 1000; /* Just below the 'X' icon */
+        z-index: 1000;
     }
 
-    /* Light Mode Sidebar */
     body.light-mode .nav-links {
         background: rgba(255, 255, 255, 0.75); 
         border-left: 1px solid rgba(0, 0, 0, 0.1);
     }
 
-    /* Triggered by JS to slide in */
     .nav-links.active {
         right: 0;
     }
@@ -1891,8 +1766,6 @@ body.light-mode .footer-signature {
     ------------------------------------ */
     .nav-links li {
         margin: 18px 0;
-        
-        /* Initial state for the fade-in animation */
         opacity: 0;
         transform: translateX(30px);
         transition: all 0.4s ease;
@@ -1905,7 +1778,6 @@ body.light-mode .footer-signature {
         align-items: center;
     }
 
-    /* Recreating the dot indicator from the reference image */
     .nav-links li a::before {
         content: '';
         display: inline-block;
@@ -1914,20 +1786,16 @@ body.light-mode .footer-signature {
         border-radius: 50%;
         background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
         margin-right: 15px;
-        
-        /* Hidden by default */
         opacity: 0;
         transform: scale(0);
         transition: all 0.3s ease;
     }
 
-    /* Show the dot on hover */
     .nav-links li a:hover::before {
         opacity: 1;
         transform: scale(1);
     }
 
-    /* Staggered Animation: Delays each link sliding in */
     .nav-links.active li {
         opacity: 1;
         transform: translateX(0);
@@ -1948,13 +1816,12 @@ body.light-mode .footer-signature {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 120px 5% 60px; /* Top padding clears the mobile navbar */
+        padding: 120px 5% 60px;
         position: relative;
         min-height: 100vh;
-        overflow-x: hidden; /* Prevents horizontal scroll from absolute elements */
+        overflow-x: hidden; 
     }
 
-    /* --- 1. Intro Text (Top Left) --- */
     .landing .left-column {
         width: 100%;
         display: flex;
@@ -1979,25 +1846,22 @@ body.light-mode .footer-signature {
         letter-spacing: -1px;
     }
 
-    /* --- 2. Social Icons (Vertical Stack on the left) --- */
-    /* Pulling this out of the standard flow to hover on the left edge */
     .social-icons {
         position: absolute;
         left: 5%;
         top: 500%; 
         transform: translateY(-50%);
         display: flex;
-        flex-direction: column; /* Stacks them vertically */
+        flex-direction: column;
         z-index: 10; 
     }
 
     .social-icons a i {
         font-size: 1.8rem;
-        color: var(--text-color); /* A nice visible gray for dark mode */
+        color: var(--text-color);
         transition: color 0.3s ease;
     }
 
-/* --- 3. Center Profile Image & Glow (Larger, Uncut Version) --- */
     .landing .center-column {
         width: 100%;
         display: flex;
@@ -2007,15 +1871,14 @@ body.light-mode .footer-signature {
     }
 
     .profile-img {
-        width: 100%;         /* Takes up the maximum available screen width */
-        max-width: 480px;    /* Significantly increased from 350px */
+        width: 100%;         
+        max-width: 480px;  
         height: auto;        
         object-fit: contain; 
         z-index: 2;
         transform: scale(1.1);
     }
     
-    /* We also need to enlarge the glow effect so it matches the new image size */
     .glow-effect {
         width: 320px;
         height: 320px;
@@ -2024,7 +1887,6 @@ body.light-mode .footer-signature {
         transform: translate(-50%, -50%);
     }
 
-    /* --- 4. Role Text (Bottom Center) --- */
     .landing .right-column {
         width: 100%;
         display: flex;
@@ -2035,12 +1897,12 @@ body.light-mode .footer-signature {
 
     .role-text {
         text-align: center;
-        margin-top: -15px; /* Pulls text slightly up to overlap the image base, matching the design */
+        margin-top: -15px;
     }
 
     .role-text .subtitle {
         font-size: 1.6rem;
-        color: #8b5cf6; /* Uses a purple/blue tone to match the reference */
+        color: #8b5cf6;
         margin-bottom: 2px;
         font-weight: 600;
         letter-spacing: 1px;
@@ -2055,19 +1917,18 @@ body.light-mode .footer-signature {
     ========================================= */
     .about-container {
         display: flex;
-        flex-direction: column-reverse; /* Flips the HTML order: Text on top, Image on bottom */
+        flex-direction: column-reverse;
         align-items: center;
         gap: 40px;
         padding-top: 40px;
     }
 
-    /* --- 1. Text Container (Top) --- */
     .about-text {
         width: 100%;
-        text-align: left; /* Aligns all text to the left matching the reference */
+        text-align: left;
         display: flex;
         flex-direction: column;
-        align-items: flex-start; /* Ensures the button aligns to the left too */
+        align-items: flex-start; 
     }
 
     .about-title {
@@ -2084,14 +1945,13 @@ body.light-mode .footer-signature {
         margin-bottom: 30px;
     }
 
-    /* --- 2. Resume Button Styling (Matching the Reference) --- */
     .about-text .btn-glow {
         margin-top: 0;
         padding: 12px 28px;
         border-radius: 30px;
-        border: 2px solid #8b5cf6; /* Adds the solid purple border */
-        background: rgba(139, 92, 246, 0.1); /* Subtle purple background tint */
-        box-shadow: 0 0 20px rgba(139, 92, 246, 0.4); /* Recreates the outer glow */
+        border: 2px solid #8b5cf6; 
+        background: rgba(139, 92, 246, 0.1);
+        box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
         font-size: 1rem;
         font-weight: 700;
         color: #fff;
@@ -2104,7 +1964,6 @@ body.light-mode .footer-signature {
         color: #334155;
     }
 
-    /* --- 3. Bottom Profile Image --- */
     .about-image-wrapper {
         width: 100%;
         display: flex;
@@ -2117,7 +1976,7 @@ body.light-mode .footer-signature {
         width: 100%;
         max-width: 320px;
         height: auto;
-        object-fit: contain; /* Prevents the cropping issue here as well */
+        object-fit: contain;
         z-index: 2;
         transform: scale(1.1);
     }
@@ -2129,7 +1988,6 @@ body.light-mode .footer-signature {
         padding: 60px 5% 40px;
     }
 
-    /* --- 1. The Pill Toggle Buttons --- */
     .toggle-container {
         margin-bottom: 40px;
         display: flex;
@@ -2138,7 +1996,7 @@ body.light-mode .footer-signature {
     }
 
     .toggle-bg {
-        background: rgba(255, 255, 255, 0.05); /* Subtle dark glass pill */
+        background: rgba(255, 255, 255, 0.05);
         border-radius: 40px;
         padding: 5px;
         display: flex;
@@ -2151,7 +2009,7 @@ body.light-mode .footer-signature {
     }
 
     .toggle-btn {
-        flex: 1; /* Splits the space 50/50 */
+        flex: 1;
         padding: 12px 10px;
         font-size: 1rem;
         border-radius: 35px;
@@ -2168,16 +2026,14 @@ body.light-mode .footer-signature {
         background: var(--primary-color);
         color: #fff; 
         font-weight: 600;
-        box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); /* Optional: Adds the nice desktop glow */
+        box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
     }
 
-    /* --- 2. The Timeline Layout --- */
     .timeline-container {
         position: relative;
-        padding-left: 25px; /* Creates space for the new left edge line */
+        padding-left: 25px; 
     }
 
-    /* Draws a continuous theme-colored line on the far left edge */
     .timeline-container::before {
         content: '';
         position: absolute;
@@ -2193,25 +2049,23 @@ body.light-mode .footer-signature {
         flex-direction: column;
         align-items: flex-start;
         text-align: left;
-        position: relative; /* Allows us to anchor the date to the top right */
+        position: relative; 
         margin-bottom: 45px;
         width: 100%;
     }
 
-    /* --- 3. Left Column (Title & Company) --- */
     .timeline-left {
         width: 100%;
-        padding-right: 70px; /* Ensures long job titles don't overlap the right-aligned date */
+        padding-right: 70px; 
     }
 
     .timeline-left h3 {
         font-size: 1.6rem;
         line-height: 1.2;
         margin-bottom: 5px;
-        color: var(--text-color); /* Automatically adapts to light/dark mode */
+        color: var(--text-color);
     }
 
-    /* Styles the company/school name using your theme color */
     .timeline-left .company {
         font-size: 1rem;
         color: var(--primary-color); 
@@ -2220,41 +2074,36 @@ body.light-mode .footer-signature {
         margin-bottom: 10px;
     }
 
-    /* Hide the long text duration on mobile */
     .timeline-left .duration {
-        display: block; /* Overrides the previous 'display: none' */
+        display: block; 
         font-size: 0.85rem;
-        margin-top: -5px; /* Pulls it slightly closer to the company name */
+        margin-top: -5px; 
     }
 
-    /* --- 4. The Date (Moved to Top Right) --- */
     .timeline-center {
         position: absolute;
         top: 0;
         right: 0;
-        display: block; /* Overrides previous mobile hidden rules */
+        display: block; 
         width: auto;
     }
 
-    /* Hide the horizontal line used on the desktop view */
     .timeline-center .timeline-line {
         display: none; 
     }
 
-    /* Styles the short year into the big bold text */
     .timeline-center .timeline-date {
         font-size: 1.8rem;
         font-weight: 800;
-        color: var(--text-color); /* Automatically adapts to light/dark mode */
+        color: var(--text-color);
         background: none; 
         padding: 0;
         box-shadow: none;
     }
 
-    /* --- 5. The Description Text --- */
     .timeline-right {
         width: 100%;
-        padding-left: 0; /* Resets desktop padding */
+        padding-left: 0; 
     }
 
     .timeline-right p {
@@ -2266,11 +2115,10 @@ body.light-mode .footer-signature {
        RESPONSIVE: IMAGE MODAL ARROWS (Max 768px)
     ========================================= */
     .modal-nav {
-        font-size: 2rem;   /* Shrinks the icon size */
-        padding: 8px;      /* Shrinks the gray background circle */
+        font-size: 2rem;  
+        padding: 8px;
     }
     
-    /* Pushes the arrows slightly closer to the edge so they don't block the image */
     .modal-nav.prev { left: 10px; }
     .modal-nav.next { right: 10px; }
 
@@ -2286,7 +2134,6 @@ body.light-mode .footer-signature {
         padding: 0 10px;
     }
 
-    /* Stack the left and right sides vertically */
     .skill-card {
         flex-direction: column; 
         align-items: center;
@@ -2295,15 +2142,12 @@ body.light-mode .footer-signature {
         gap: 20px;
     }
 
-    /* Format the Category Header (Top) */
     .skill-left {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        
-        /* Remove the desktop right-border and replace it with a bottom-border */
         border-right: none; 
         border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
         
@@ -2311,15 +2155,13 @@ body.light-mode .footer-signature {
         padding-bottom: 20px;
     }
 
-    /* Light mode override for the new horizontal divider */
     body.light-mode .skill-left {
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
 
-    /* Center the skill items below the divider */
     .skill-right {
         width: 100%;
-        justify-content: center; /* Centers the badges horizontally */
+        justify-content: center;
         padding-left: 0;
     }
 
@@ -2330,31 +2172,25 @@ body.light-mode .footer-signature {
         padding: 60px 5% 90px;
     }
 
-    /* --- 1. Stack the Form and Info Cards --- */
     .contact-container {
         display: flex;
-        flex-direction: column; /* Stacks the form on top of the info cards */
-        gap: 40px; /* Adds breathing room between the form and the cards below it */
+        flex-direction: column;
+        gap: 40px; 
     }
 
-    /* Ensure both sides take up the full screen width */
     .contact-form,
     .contact-info-wrapper {
         width: 100%;
     }
 
-    /* --- 2. Stack the Form Inputs --- */
-    /* On desktop, Name/Email and Phone/Subject sit side-by-side. 
-       On mobile, we stack them so they are wide enough to type in easily. */
     .input-row {
         display: flex;
         flex-direction: column;
         gap: 15px; 
     }
 
-    /* Adjust padding for the submit button to fit perfectly */
     .submit-btn {
-        width: 100%; /* Makes the button span the full width of the form */
+        width: 100%;
         padding: 15px;
     }
 
@@ -2362,7 +2198,7 @@ body.light-mode .footer-signature {
        RESPONSIVE: BACK TO TOP BUTTON (Max 768px)
     ========================================= */
     .back-to-top {
-        width: 60px;  /* Slightly smaller for mobile */
+        width: 60px; 
         height: 60px;
         font-size: 1.5rem;
     }
@@ -2372,15 +2208,12 @@ body.light-mode .footer-signature {
    RESPONSIVE: SMALL MOBILE (Max 430px)
 ========================================= */
 @media (max-width: 430px) {
-    
-    /* --- General Typography & Spacing --- */
     .section-title {
-        font-size: 2rem; /* Scales down all section titles */
+        font-size: 2rem;
     }
 
-    /* --- Landing Section --- */
     .intro-text .title {
-        font-size: 2.5rem; /* Shrunk from 3.2rem */
+        font-size: 2.5rem;
     }
 
     .role-text .subtitle {
@@ -2388,10 +2221,9 @@ body.light-mode .footer-signature {
     }
 
     .role-text .title {
-        font-size: 2.2rem; /* Shrunk from 2.8rem */
+        font-size: 2.2rem;
     }
 
-    /* Scale the glow effect down so it doesn't bleed off the edges */
     .glow-effect {
         width: 260px;
         height: 260px;
@@ -2403,30 +2235,30 @@ body.light-mode .footer-signature {
     }
 
     .about-desc {
-        font-size: 1rem; /* Shrunk from 1.2rem for easier mobile reading */
+        font-size: 1rem; 
     }
 
     /* --- Experience & Education --- */
     .toggle-btn {
-        font-size: 0.85rem; /* Slightly smaller text in the pills */
+        font-size: 0.85rem; 
         padding: 10px 5px;
     }
 
     .timeline-left {
-        padding-right: 55px; /* Adjusted to match the smaller date */
-    }
+        padding-right: 55px;
+    }    
 
     .timeline-left h3 {
         font-size: 1.3rem;
     }
 
     .timeline-center .timeline-date {
-        font-size: 1.4rem; /* Shrunk from 1.8rem */
+        font-size: 1.4rem;
     }
 
     /* --- Skills Section --- */
     .skill-card {
-        padding: 20px 15px; /* Tighter padding for small screens */
+        padding: 20px 15px;
     }
     
     .skill-left h3 {
@@ -2434,22 +2266,20 @@ body.light-mode .footer-signature {
     }
 
     .skill-item {
-        font-size: 0.9rem; /* Smaller text for the skill badges */
+        font-size: 0.9rem;
     }
 
-    /* --- Image Modal Arrows --- */
     .modal-nav {
-        font-size: 1.2rem; /* Shrinks the icon even further for phones */
-        padding: 6px;      /* Makes the gray circle tighter */
+        font-size: 1.2rem; 
+        padding: 6px;
     }
     
-    /* Pushes them right against the edge to maximize viewing space for the certificate */
     .modal-nav.prev { left: 5px; }
     .modal-nav.next { right: 5px; }
 
     /* --- Contact Section --- */
     .contact-card {
-        padding: 15px; /* Tighter padding */
+        padding: 15px; 
     }
 
     .contact-icon {
@@ -2468,7 +2298,6 @@ body.light-mode .footer-signature {
         font-size: 0.9rem;
     }
 
-    /* Shrinks the circular arrow container slightly */
     .contact-arrow {
         width: 35px;
         height: 35px;
@@ -2479,7 +2308,6 @@ body.light-mode .footer-signature {
     }
 
     /* --- Back to Top Button --- */
-    /* Shrinks the button from 60px to a more mobile-friendly 45px */
     .back-to-top {
         width: 45px;  
         height: 45px;

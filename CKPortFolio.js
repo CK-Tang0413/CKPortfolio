@@ -14,11 +14,9 @@ themeToggleBtn.addEventListener('click', () => {
 const menuIcon = document.getElementById('menu-icon');
 const navLinks = document.querySelector('.nav-links');
 
-// Toggle menu on click
 if (menuIcon) {
     menuIcon.addEventListener('click', () => {
         navLinks.classList.toggle('active');
-        // Optional: Change icon from hamburger to 'X'
         const icon = menuIcon.querySelector('i');
         if (navLinks.classList.contains('active')) {
             icon.classList.replace('bx-menu', 'bx-x');
@@ -28,7 +26,6 @@ if (menuIcon) {
     });
 }
 
-// Close menu when a link is clicked
 document.querySelectorAll('.nav-links li a').forEach(link => {
     link.addEventListener('click', () => {
         navLinks.classList.remove('active');
@@ -72,7 +69,6 @@ function typeEffect() {
     setTimeout(typeEffect, typeSpeed);
 }
 
-// Start typing effect after page load animations
 setTimeout(typeEffect, 1500);
 
 
@@ -134,14 +130,12 @@ function switchTab(activeBtn, inactiveBtn, showContent, hideContent, newTitle) {
 
 btnExperience.addEventListener('click', () => {
     if(!btnExperience.classList.contains('active')) {
-        // Injects the gradient span into the new title
         switchTab(btnExperience, btnEducation, contentExperience, contentEducation, 'My <br><span class="highlight-gradient">Work Experience</span>');
     }
 });
 
 btnEducation.addEventListener('click', () => {
     if(!btnEducation.classList.contains('active')) {
-        // Injects the gradient span into the new title
         switchTab(btnEducation, btnExperience, contentEducation, contentExperience, 'My <br><span class="highlight-gradient">Education</span>');
     }
 });
@@ -151,7 +145,7 @@ btnEducation.addEventListener('click', () => {
 ========================================= */
 // 1. Initialize Swiper
 const swiper = new Swiper(".mySwiper", {
-    slidesPerView: 1, // Default (Mobile screens under 768px)
+    slidesPerView: 1,
     spaceBetween: 20,
     loop: true,
     speed: 800, 
@@ -164,29 +158,23 @@ const swiper = new Swiper(".mySwiper", {
         el: ".swiper-pagination",
         clickable: true,
     },
-    // NEW: Updated Responsive Breakpoints
     breakpoints: {
-        // When screen is >=430px (Moblie)
         430: {
             slidesPerView: 1
         },
-        // When screen is >= 768px (Tablets)
         768: {
-            slidesPerView: 2, /* Changed to 2 cards for better spacing */
+            slidesPerView: 2,
             spaceBetween: 25,
         },
-        // When screen is >= 1024px (Laptops and Desktops)
         1024: {
-            slidesPerView: 3, /* Shows 3 cards only when there is enough room */
+            slidesPerView: 3,
             spaceBetween: 30,
         }
     }
 });
 
-// We must define swiperEl so the click listener knows where to look!
 const swiperEl = document.querySelector(".mySwiper");
 
-// 2. Lightbox Modal Variables
 const modal = document.getElementById('image-modal');
 const modalImg = document.getElementById('modal-img');
 const closeModalBtn = document.querySelector('.close-modal');
@@ -195,17 +183,14 @@ const nextBtn = document.querySelector('.modal-nav.next');
 let currentGallery = [];
 let currentImageIndex = 0;
 
-// 3. Event Delegation for Image Clicks (Required because Swiper clones slides)
 if (swiperEl && modal) {
     swiperEl.addEventListener('click', function(e) {
-        // Check if what was clicked was an image inside our card
         const img = e.target.closest('.card-img-container img');
         
         if (img) {
             modal.classList.add('show');
-            swiper.autoplay.stop(); // Stop carousel when viewing image
+            swiper.autoplay.stop();
             
-            // Define galleries based on image clicked
             if (img.classList.contains('redhat-cert')) {
                 currentGallery = ['img/RedHat Part 1 Cert.png', 'img/RedHat Part 2 Cert.png'];
             } else {
@@ -215,7 +200,6 @@ if (swiperEl && modal) {
             currentImageIndex = 0;
             modalImg.src = currentGallery[currentImageIndex];
             
-            // Show/Hide navigation arrows based on gallery size
             if (currentGallery.length > 1) {
                 prevBtn.classList.add('show-nav');
                 nextBtn.classList.add('show-nav');
@@ -226,21 +210,18 @@ if (swiperEl && modal) {
         }
     });
 
-    // 4. Slider Arrow Logic
     window.changeImage = function(direction) {
         currentImageIndex = (currentImageIndex + direction + currentGallery.length) % currentGallery.length;
         modalImg.src = currentGallery[currentImageIndex];
     };
 
-    // 5. Close Modal Logic
     const closeModal = () => {
         modal.classList.remove('show');
-        swiper.autoplay.start(); // Resume carousel
+        swiper.autoplay.start();
     };
 
     closeModalBtn.addEventListener('click', closeModal);
     
-    // Close when clicking outside the image
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
             closeModal();
@@ -260,16 +241,13 @@ accordionItems.forEach(item => {
     header.addEventListener('click', () => {
         const isActive = item.classList.contains('active');
 
-        // Optional UX Feature: Close all other open accordions before opening the clicked one
         accordionItems.forEach(otherItem => {
             otherItem.classList.remove('active');
             otherItem.querySelector('.accordion-content').style.maxHeight = null;
         });
 
-        // Toggle the clicked item
         if (!isActive) {
             item.classList.add('active');
-            // scrollHeight dynamically gets the exact pixel height needed for the hidden text
             content.style.maxHeight = content.scrollHeight + "px";
         }
     });
@@ -283,20 +261,18 @@ const homeSection = document.getElementById('home');
 
 const showBtnObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        // If Home is NOT in view, show the button
         if (!entry.isIntersecting) {
             backToTopBtn.classList.add('show');
         } else {
             backToTopBtn.classList.remove('show');
         }
     });
-}, { threshold: 0.1 }); // Trigger when 10% of Home has scrolled out
+}, { threshold: 0.1 });
 
 if (homeSection) {
     showBtnObserver.observe(homeSection);
 }
 
-// Smooth scroll back to top
 backToTopBtn.addEventListener('click', (e) => {
     e.preventDefault();
     window.scrollTo({
@@ -316,13 +292,10 @@ window.addEventListener('scroll', () => {
         const footerRect = footer.getBoundingClientRect();
         const scrollPosition = window.innerHeight;
 
-        // If the top of the footer is within the viewport
         if (footerRect.top < scrollPosition) {
-            // Calculate how much the footer is overlapping the bottom 30px margin
             const overlap = scrollPosition - footerRect.top + 20; 
             backToTopBtn.style.bottom = `${overlap}px`;
         } else {
-            // Reset to original position when not near footer
             backToTopBtn.style.bottom = '30px';
         }
     }
